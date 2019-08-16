@@ -1,0 +1,17 @@
+
+
+{% extends "base.html" %}
+{% set active_page = "invalid" %}
+
+{% from "_macros.html" import render_flashes_all %}
+
+{% block content %}
+
+<div class="panel" style="width: 30%;">
+	<span class="error">Invalid request!</span>
+	
+		{{ render_flashes_all() }}
+	
+</div>
+
+{% endblock %}

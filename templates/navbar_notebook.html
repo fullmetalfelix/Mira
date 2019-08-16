@@ -1,0 +1,36 @@
+
+<div class="navbar">
+
+	
+	<img class="clickImg" src="/static/imgs/button.back.svg" onclick="window.location.href='/dashboard';" title="back to the dashboard"/>
+	
+	<div class="clickdiv" onclick="window.location.href='/dashboard';">back</div>
+	
+	<span id="separator"></span>
+
+	<!--<a href="{{ url_for('index') }}"><img class="logo" src="/static/imgs/amad-logo.svg" /></a> -->
+	<span>notebook:&nbsp;</span>
+	<span id="navbar-nbtitle" onclick="window.scrollTo(0,0);">TITLE</span>
+
+	<span id="separator"></span>
+	
+	<img id="nblock" src="/static/imgs/button.lock.closed.svg" title="lock status">
+
+	<img class="clickImg" src="/static/imgs/button.data.svg" title="open data explorer" onclick="Notebook_dataexp_show();"/>
+
+	<div class="nobg" style="width: 3em;">
+		<img id="refresher" class="clickImg" src="/static/imgs/button.refresh.svg" title="refresh notebook content" style="display: none;" onclick="Notebook_refresh_notebook();"/>
+		<div id="spinner" class="spinner" style="width: 2em; height: 2em; padding: 0;"></div>
+	</div>
+	<div class="nobg">
+		<div class="flexcol" style="height: 100%;">
+			<img class="halfimg" src="/static/imgs/button.up.svg" title="go to top" onclick="window.scrollTo(0,0);" />
+			
+			<img class="halfimg" src="/static/imgs/button.down.svg" title="go to end" onclick="window.scrollTo(0,document.documentElement.scrollHeight);" />
+			
+		</div>
+	</div>
+	
+
+</div>
+

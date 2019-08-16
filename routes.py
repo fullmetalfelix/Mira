@@ -17,7 +17,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 def index:
 
 
-	return ""
+	return render_template('index.html')
 
 
 @app.route('/upload')

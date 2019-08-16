@@ -1,0 +1,63 @@
+
+
+
+{% macro render_field_errors(field) %}
+{%- if field.errors %}
+	{%- for error in field.errors %}
+		<div class="flexrow">
+			<label class="control-label">Error:</label>
+			<span  class="control-input error">{{error}}</span>
+		</div>
+	{%- endfor %}
+	<hr class="thinline"/>
+{%- endif %}
+{% endmacro %}
+
+{% macro render_field_text(field, type, placeholder, value) %}
+<div class="flexrow">
+	<label class="control-label">{{ field.label.text }}:</label>
+	<input class="control-input boxed" id="{{field.id}}" name="{{field.name}}" type="{{ type }}" value="{{ value }}" placeholder="{{placeholder}}" />
+</div>
+{{ render_field_errors(field) }}
+{% endmacro %}
+
+
+
+{% macro render_flashes(messages, category, label, class) %}
+{% for message in messages %}
+{% if message[0] == category %}
+<div class="flexrow">
+	<label class="control-label">{{label}}:</label>
+	<span  class="control-input {{class}}">{{message[1]}}</span>
+</div>
+{% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro render_flashes_all() %}
+	{% with messages = get_flashed_messages() %}
+		{% for msg in messages %}
+		<div class="flexrow">
+			<label class="control-label">Message:</label>
+			<span  class="control-input">{{msg}}</span>
+		</div>
+		{% endfor %}
+	{% endwith %}
+{% endmacro %}
+
+
+{%- macro render_user_screenname(usrinfo) -%}
+{%- if not usrinfo['fullname'] -%}
+{{usrinfo['name']}}
+{%- else -%}
+{%- if usrinfo['fullname'] == "" -%}
+{{usrinfo['name']}}
+{%- else -%}
+{{usrinfo['fullname']}}
+{%- endif -%}
+{%- endif -%}
+{% endmacro -%}
+
+{% macro render_userlink(usrinfo) %}
+<a href="/account/{{usrinfo['name']}}">{{render_user_screenname(usrinfo)}}</a>
+{% endmacro %}

@@ -1,0 +1,2500 @@
+
+body {
+  font-family: Consolas,monaco,monospace;
+  background: white;
+  margin: 0;
+  font-size: 12px;
+}
+
+a {
+	color: black;
+}
+a:hover {
+  color: #666;
+}
+
+h4 {
+  margin: 0.5em;
+}
+
+
+.separator {
+	flex-grow: 2;
+	min-width: 1em;
+}
+
+#separator {
+	flex-grow: 2;
+	min-width: 1em;
+}
+
+#separator-min {
+	flex-grow: 2;
+}
+
+.bordered {
+
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+
+.flexbox {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flexcol {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	flex-direction: column;
+}
+
+.flexstep {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	width: 100%;
+	padding: 0.5em 0em;
+	justify-content: space-between;
+}
+
+
+.flexcontrol {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	padding: 8px 0px;
+	/*>>>>>>> origin/cassandra*/
+	width: 100%;
+
+}
+
+.step-controlbox {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	flex-direction: column;
+	justify-content: space-around;
+
+	border: 1px solid #333;
+	border-radius : 4px;
+
+	padding: 0.5em;
+	margin: auto 0;
+
+	min-width: 12em;
+}
+
+
+/* *** NAVBAR STUFF *** **************************************************** */
+/* Add a black background color to the top navigation */
+.navbar {
+	
+	margin: 0;
+	top: 0;
+
+	width: 100%;
+	height: 3.6em;
+
+	background-color: #333;
+	color: white;
+
+	position: fixed;
+	overflow: hidden;
+	text-align: center;
+	text-decoration: none;
+	z-index: 100;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	font-size: 12px;
+}
+
+/* chid divs are for clickable sections  */
+.navbar > div {
+
+	cursor: pointer;
+
+	background-color: #444;
+	text-align: center;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+	padding: 0em 0.5em;
+}
+
+.navbar > div:hover,
+.navbar > div[hover] {
+	background-color: #888;
+}
+
+.navbar > div.active {
+	background-color: #666;
+}
+
+.navbar #separator {
+	flex-grow: 2;
+}
+
+.navbar  img {
+	height: 70%;
+	margin: 0.2em;
+}
+
+.navbar  img.halfimg {
+	height: 50%;
+	margin: unset;
+	cursor: pointer;
+}
+
+.navbar  img.halfimg:hover,
+.navbar  img.halfimg[hover] {
+	background-color: #888;
+}
+
+.navbar  img.clickImg:hover,
+.navbar  img.clickImg[hover] {
+	background-color: #888;
+}
+
+
+
+.navbar > div.nobg {
+
+	background-color: unset;
+	cursor: unset;
+}
+
+
+/* *** END OF NAVBAR *** **************************************************** */
+/* *** NEW NAVBAR *** ******************************************************* */
+
+.navbar2 {
+
+	
+	overflow: hidden;
+	position: fixed;
+	margin: 0;
+
+	width: 100%;
+	height: 3.3em;
+	z-index: 100;
+
+	background-color: #333;
+	
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+	
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	align-items: center;
+}
+
+.navbar div.clickdiv {
+
+	height: 100%;
+	line-height: 3.3em;
+	text-align: center;
+	text-decoration: none;
+
+	background-color: #444;
+	cursor: pointer;
+
+	padding: 0em 0.5em;
+
+}
+
+.navbar div.clickdiv:hover,
+.navbar div.clickdiv[hover] {
+	background-color: #555;
+}
+
+.navbar2 div.clickdiv:active,
+.navbar2 div.clickdiv[active] {
+	background-color: #666;
+}
+
+
+
+.navbar img.small {
+	height: 60%;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+
+/* ************************************************************************* */
+/* *** FOOTER *** */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2em;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  z-index: 100;
+
+  font-size: 12px;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer > div {
+	cursor: pointer;
+	text-align: center;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+	padding: 0em 0.5em;
+}
+
+.footer img {
+	height: 90%;
+	margin: 0.2em;
+}
+/* *** END OF FOOTER *** *************************************************** */
+
+
+
+
+
+
+/* *** DASHBOARD *** ******************************************************* */
+
+div#dashboard {
+	width:100%; 
+	height:100%;
+}
+
+div#dashboard #mainbox {
+	position: absolute;
+	flex-grow: 2; 
+	align-items: flex-start;
+	width: 100%;
+	top: 0;
+	bottom: 1em;
+}
+
+div#dashboard div#menu {
+	padding: 1em;
+	margin: 0;
+	min-width: 10em;
+}
+
+div#dashboard div#menu div[data-ext]>img {
+	margin-right: 1em;
+}
+
+div#dashboard div#tabcontainer {
+	padding: 0em;
+	margin: 0;
+	margin-left: 1em;
+	flex-grow: 2;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+
+div#dashboard [data-ext~="tab"] {
+	padding: 1em 1em;
+	margin: 0;
+}
+
+div#dashboard #menu > div {
+	align-items: center;
+	cursor: pointer;
+
+}
+div#dashboard #menu > div:hover,
+div#dashboard #menu > div[hover] {
+	background: #EEE;	
+}
+
+div#dashboard #menu > div.active {
+	background: #DDD;	
+}
+
+
+/* *** GENERIC STUFF IN THE PANELS *** ************************************ */
+
+.abswrapper {
+
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: 0;
+	margin: 0;
+}
+
+
+[data-ext~="tab"] > div {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: baseline;
+	padding: 8px 0px;
+}
+
+[data-ext~="tab"] > div.centered {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	padding: 8px 0px;
+}
+
+[data-ext~="tab"] > div.nobox {
+
+	display: block;
+	padding: 0;
+}
+
+[data-ext~="tab"] div.nobox {
+
+	display: block;
+	padding: 0;
+}
+
+[data-ext~="tab"] th.left {
+	text-align: left;
+}
+
+[data-ext~="tab"] td.center {
+	text-align: center;
+}
+
+[data-ext~="tab"] #addelement {
+	padding: 0;
+	cursor: pointer;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+/* *** ACCOUNT PANEL *** *************************************************** */
+#account[data-ext~="tab"] button,
+#groups-home[data-ext~="tab"] button {
+	height: 2em;
+}
+
+
+#groups[data-ext~="tab"] .clickImg {
+	height: 2em;
+}
+
+
+#account-other[data-ext~="tab"] > #panel-user-info > div {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: baseline;
+	padding: 8px 0px;
+	width: 100%;
+}
+
+
+
+
+/* *** GROUPS/HOME PANEL *** *********************************************** */
+[data-type="userbox"]:hover,
+[data-type="userbox"][hover] {
+	background-color: #EEE;
+}
+
+
+/* *** NOTEBOOKS PANEL *** ************************************************* */
+
+#notebooks[data-ext~="tab"] [data-linker="1"] {
+	cursor: pointer;
+}
+
+#notebooks[data-ext~="tab"] tbody tr:hover,
+#notebooks[data-ext~="tab"] tbody tr[hover] {
+	background-color: #EEE;
+}
+
+
+/* *** MESSAGE PANEL *** *************************************************** */
+
+
+div#dashboard #messages[data-ext~="tab"] div#controlwrap {
+	top: 0;
+	height: 4em;
+	border-bottom: 1px solid black;
+}
+
+
+div#dashboard #messages[data-ext~="tab"] {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+
+div#dashboard #messages[data-ext~="tab"] #controls {
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+	height: 100%;
+	margin: 0em 1em;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+}
+
+#messages[data-ext~="tab"] .ctrl {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	border: 1px solid black;
+	border-radius: 4px;
+
+	padding: 0.2em 0.5em;
+	margin: 0em 0.5em;
+	cursor: pointer;
+}
+#messages[data-ext~="tab"] .ctrl:hover,
+#messages[data-ext~="tab"] .ctrl[hover] {
+	background-color: #EEE;
+}
+
+#messages[data-ext~="tab"] .ctrl.selected{
+	background-color: #DDD;
+}
+
+
+div#dashboard #messages[data-ext~="tab"] #listbox {
+	top: 4em;
+	bottom: 0;
+	overflow: auto;
+}
+
+div#dashboard #messages[data-ext~="tab"] #list {
+	
+	display: grid;
+	margin-top: 1em;
+	grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
+
+#messages[data-ext~="tab"] .messagebox {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+
+	min-width: 15em;
+	max-width: 20em;
+
+	padding: 0;
+	border: 1px solid #444;
+	border-radius: 4px;
+	margin: 0.2em 0.2em;
+}
+
+/* ************************************************************************* */
+
+/* *** ADMIN  PANEL *** **************************************************** */
+div#dashboard #admin[data-ext~="tab"] {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+div#dashboard #admin[data-ext~="tab"] div#controlwrap {
+	top: 0;
+	height: 4em;
+	border-bottom: 1px solid black;
+}
+
+div#dashboard #admin[data-ext~="tab"] #controls {
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+	height: 100%;
+	margin: 0em 1em;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+}
+
+div#dashboard #admin[data-ext~="tab"] .fixpanel {
+	top: 4em;
+	bottom: 0;
+	overflow: auto;
+}
+
+/* *** SEARCH PANEL *** **************************************************** */
+
+div#dashboard #search[data-ext~="tab"] div#controlwrap {
+	top: 0;
+	height: 4em;
+	border-bottom: 1px solid black;
+}
+
+
+div#dashboard #search[data-ext~="tab"] {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+
+div#dashboard #search[data-ext~="tab"] #controls {
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+	height: 100%;
+	margin: 0em 1em;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+}
+
+#search[data-ext~="tab"] .ctrl {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	border: 1px solid black;
+	border-radius: 4px;
+
+	padding: 0.2em 0.5em;
+	margin: 0em 0.5em;
+	cursor: pointer;
+}
+#search[data-ext~="tab"] .ctrl:hover,
+#search[data-ext~="tab"] .ctrl[hover] {
+	background-color: #EEE;
+}
+
+#search[data-ext~="tab"] .ctrl.selected{
+	background-color: #DDD;
+}
+
+
+div#dashboard #search[data-ext~="tab"] .fixpanel {
+	top: 4em;
+	bottom: 0;
+	overflow: auto;
+}
+
+.searchpanel {
+	margin: 0.5em;
+}
+
+div#dashboard #search[data-ext~="tab"] #list {
+	
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	align-content: stretch;
+	justify-content: space-evenly;
+	margin-top: 1em;
+}
+
+
+
+div#dashboard #search[data-ext~="tab"] #filters [data-filter]>label {
+	width: 10em;
+}
+
+
+
+/* ************************************************************************* */
+
+
+
+
+
+
+/* *** BUTTONS *** ********************************************************* */
+
+.gbutton {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+
+	padding: 0.2em 0.5em;
+	margin: 0 0.5em;
+	
+	cursor: pointer;
+	color: white;
+	font-family: Consolas,monaco,monospace;
+
+	background-color: #333;
+	border: none;
+	border-radius: 4px;
+
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+
+.gbutton:hover,
+.gbutton[hover] {
+
+	background-color: #888;
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+
+
+.gbutton.selected {
+
+	background-color: #666;
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+.gbutton:disabled,
+.gbutton[disabled]{
+
+	background-color: #AAA;
+	color: #666;
+}
+
+.gbutton > img {
+	padding-right: 0.5em;
+	height: 2em;
+}
+
+/* ************************************************************************* */
+/* *** CUSTOM SINGLE SLIDER *** ******************************************** */
+
+
+label[type='slider'] {
+	margin: 0.5em 0em;
+}
+
+label[type='slider'] span#value {
+	min-width: 2em;
+}
+label[type='slider'] div {
+	flex-grow: 2; 
+	margin: 0em 1em;
+}
+
+/* ************************************************************************* */
+/* *** CUSTOM CHECKBOX *** ************************************************* */
+input[type='checkbox'].labcore {
+	
+	position: absolute;
+	left: -99999px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+input[type='checkbox'].labcore ~ span.checkbox {
+	
+	width: 1.5rem;
+	height: 1.5rem;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	background: url(/static/imgs/icon.checkbox.false.svg) center no-repeat;
+	background-size: 100%;
+	cursor: pointer;
+}
+
+input[type='checkbox'].labcore ~ span#label {
+	padding-right: 1em;
+}
+
+
+input[type='checkbox'].labcore:hover ~ .checkbox {
+	/*box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);*/
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+/* Styles for the focus state of the custom checkbox */
+input[type='checkbox'].labcore:focus ~ .checkbox {
+	/*box-shadow: 0 0 0 2px rgba(0, 0, 200, 0.25);*/
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+/* Styles for the checked state of the custom checkbox */
+input[type='checkbox'].labcore:checked ~ .checkbox {
+	background: url(/static/imgs/icon.checkbox.true.svg) center no-repeat;
+	background-size: 100%;
+}
+
+input[type='checkbox'].labcore:disabled ~ .checkbox {
+	filter: invert(60%);
+}
+
+
+
+/* ************************************************************************* */
+/* *** CUSTOM JQUERY UI SLIDER *** ***************************************** */
+.ui-slider {
+	background: #F0F0F0;
+	border-radius: 2px;
+	border: 1px solid #BBB;
+}
+.ui-slider-range {
+	background: #666;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -33%;
+	background: #DDD;
+	border-radius: 4px;
+	border: 1px solid #666;
+}
+
+/* ************************************************************************* */
+/* *** CUSTOM SELECT BOX *** *********************************************** */
+/*select.labcore {
+	position: relative;
+	font-family: font-family: Consolas,monaco,monospace;
+}*/
+select.labcore select { display: none; }
+
+
+label[type="select"].labcore {
+	position: relative;
+	display: inline-block;
+	/*margin: 0em 0.5em;*/
+}
+
+label[type="select"].labcore select {
+
+	display: inline-block;
+	width: 100%;
+
+	border: 2px solid #666;
+	border-radius: 4px;
+
+	padding: 4px 1em 3px 5px;
+	margin: 0;
+	font: inherit;
+	outline:none; /* remove focus ring from Webkit */
+	line-height: 1.2;
+	background: #f8f8f8;
+
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+label[type="select"].labcore select::-ms-expand { 
+	display: none; /* remove default arrow in IE 10 and 11 */
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+	label[type="select"].labcore select {
+		background:none\9;
+		padding: 5px\9;
+	}
+}
+
+/* Since we removed the default focus styles, we have to add our own */
+label[type="select"].labcore select:focus {
+
+	box-shadow: 0 0 3px 1px #CCC;
+}
+    
+/* Select arrow styling */
+label[type="select"].labcore:after {
+	content: "▼";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 7px;
+
+	color: black;
+	font-size: 80%;
+	line-height: 30px;
+	
+	pointer-events: none;
+}
+
+.no-pointer-events label[type="select"].labcore:after {
+	content: none;
+}
+
+
+#interface-line2D label[type="select"].labcore, 
+#interface-plot2D-settings label[type="select"].labcore {
+	width: 100%;
+}
+
+/* ************************************************************************* */
+/* *** CUSTOM INPUT FIELD *** ********************************************** */
+
+input[type="text"],
+input[type="password"] {
+
+	font: inherit;
+	padding: 0.2em;
+	margin: 0em 0.5em;
+
+	border: 2px solid #666;
+	border-radius: 4px;
+
+	outline:none;
+	background: #f8f8f8;
+
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+
+textarea {
+
+	font: inherit;
+	padding: 0.2em;
+	margin: 0em 0.5em;
+
+	border: 2px solid #666;
+	border-radius: 4px;
+
+	outline:none;
+	background: #f8f8f8;
+
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+textarea:focus {
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+/* ************************************************************************* */
+/* *** INPUT NUMBER *** **************************************************** */
+input[type="number"] {
+	font: inherit;
+	border: 2px solid #666;
+	border-radius: 4px;
+	padding: 4px 0em 3px 5px;
+	margin: 0em;
+}
+
+input[type="color"] {
+	font: inherit;
+	border: 2px solid #666;
+	border-radius: 4px;
+	padding: 0.3em;
+	margin: 0em;
+}
+
+/* ************************************************************************* */
+
+.panelheading {
+
+	font-weight: bold;
+	/*font-variant: small-caps;*/
+	margin: 0.2em 0em;
+}
+
+
+
+
+
+#interface-plot-settings td {
+	padding: 0em 0.5em;
+	text-align: center;
+}
+
+
+#interface-plot-settings td table {width: 100%;}
+
+
+#interface-plot2D-settings tr td label[type="select"].labcore { width: 100%; }
+
+
+
+
+/* *** PARAMETER REFERENCES *** ******************************************** */
+div[data-obj="reftag"] {
+	display: -webkit-inline-flex;
+	display: inline-flex;
+}
+
+div[data-obj="reftag"][data-type="parameter"] #btCtrl {
+	font-size: 16px;
+}
+
+div[data-obj="reftag"][data-type="parameter"] #refctrl {
+	display: -webkit-inline-flex;
+	display: inline-flex;
+}
+
+#refctrl #units {
+	width: 8em;	
+}
+
+#refctrl #pre,
+#refctrl #post {
+	width: 3em;	
+}
+
+/* ************************************************************************* */
+
+
+
+/* *** TABLES WITH FIXED HEADER *** **************************************** */
+
+.tablediv {
+	flex-grow: 2;
+	font-size: 12px;
+}
+
+.tablediv .tablereg {
+	
+	position: relative;
+	display: block;
+	min-height: 14em;
+}
+
+.tablediv .tablereg .tablewrap {
+	display: block;
+	position: absolute;
+	overflow-y: scroll;
+	overflow-x: auto;
+	max-width: 98%;
+	max-height: 100%;
+}
+
+
+.tablediv .tablereg .tablewrap table {
+	
+	border-collapse: collapse;
+	border: 1px solid black;
+	
+}
+
+
+.tablediv .tableheader {
+	position: sticky;
+	top: 0;
+	display: block;
+}
+
+.tablediv thead {
+	background: #DDDDDD;
+	border: 1px solid black;
+}
+
+.tablediv .tablebody {
+	float: left;
+	height: 100%;
+	width: inherit;
+	padding-right: 16px;
+}
+
+.tablediv th,
+.tablediv td {
+	min-width: 10em;
+	max-width: 10em;
+
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+
+}
+
+
+.tablediv table td + td { border-left:1px solid black; }
+.tablediv table th + th { border-left:1px solid black; }
+/*.tablediv table tr.rowborder td {
+	border-bottom:1pt solid black;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+*/
+
+
+/* *** SIMPLE TABLES *** */
+table.simple {
+	font-size: 12px;
+	border-collapse: collapse;
+}
+table.simple thead {
+	background: #DDDDDD;
+}
+table.simple th {
+	border-bottom: 1px solid black;
+}
+table.simple th,
+table.simple td {
+	text-align: left;
+	padding: 0.5em 1em;
+}
+
+table.simple tbody tr:nth-child(odd) {
+	background: #F0F0F0;
+}
+
+
+
+
+/* ************************************************************************* */
+
+
+
+
+
+
+
+
+
+
+
+
+.usr-link {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+
+
+.pagecontent {
+
+	margin-top: 4em;
+	margin-bottom: 2.4em;
+	margin-left: 1em;
+	margin-right: 1em;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+.thinline {
+
+	height: 1px;
+	border-width: 0;
+	color: black;
+	background-color: #dddddd;
+	margin: 1em;
+}
+
+
+
+.error {
+  color: red;
+}
+
+.flexcontainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  margin: 4px;
+}
+
+.container-vertical {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	align-items: flex-start;
+	justify-content: flex-start;
+	-webkit-flex-flow: column;
+	flex-flow: column;
+
+	margin: 4px;
+}
+
+/* For panels in the center of the screen - like login/register/recovery */
+.centerpanel {
+  margin: auto;
+  width: 40%;
+  border: 1px solid #333;
+  border-radius: 0px;
+  box-shadow: 0 0 4px 0px #c1c1c1;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.panel {
+
+	border: 2px solid #333;
+	border-radius : 4px;
+	box-shadow: 0 0 4px 0px #CCC;
+
+	padding: 10px;
+	margin: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  overflow: auto;
+  width: 50%;
+  /*30em;*/
+  /* height: 30%; */
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.interface {
+	width: 98%;
+	height: 98%;
+	margin:0;
+	padding: 0;
+}
+
+
+.interface  #iArea { margin: 1em; }
+
+
+
+.interfacebox {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	margin: 0em 1em;
+	flex-flow: column;
+	height: inherit;
+}
+
+
+.flexrow {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: baseline;
+  padding: 0.3em 0px;
+}
+
+.flexrow-centered {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	padding: 0.3em 0px;
+}
+
+
+.scrollbox-scroller {
+
+	position: absolute;
+	overflow: auto;
+
+	top: 0;
+	margin: 0;
+
+	width: 100%;
+	height: 100%;
+}
+
+
+.centered {
+  align-items: center;
+}
+
+.incenter {
+  justify-content: center;
+}
+
+.small {
+  font-size: 11px;
+}
+
+.icon {
+  height: 2em;
+}
+
+.icon-inline {
+  height: 1.2em;
+}
+
+.control-label {
+  flex-basis: 30%;
+  font-size: 14px;
+}
+
+.control-input {
+	flex-basis: 70%;
+	font-family: Consolas,monaco,monospace;
+	flex-grow: 2;
+	font-size: 14px;
+}
+
+.button-icon {
+  height: 100%;
+  display: inline-block;
+}
+
+.group-icon {
+  height: 32px;
+  //align-self: baseline;
+  //vertical-align:middle;
+  display: block;
+}
+
+.group-icon:focus {
+  outline: none;
+}
+
+.unselectable {
+  /* For Opera and <= IE9, we need to add unselectable="on" attribute onto each element */
+  /* Check this site for more details: http://help.dottoro.com/lhwdpnva.php */
+  -moz-user-select: none;
+  /* These user-select properties are inheritable, used to prevent text selection */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  /* From IE10 only */
+  user-select: none;
+  /* Not valid CSS yet, as of July 2012 */
+  -webkit-user-drag: none;
+  /* Prevents dragging of images/divs etc */
+  user-drag: none;
+  outline: none;
+}
+
+.uselectable:focus {
+  outline: none;
+}
+
+.nobg {
+  background-color: transparent;
+}
+
+.nopad {
+  padding: 0;
+}
+
+.textbox {
+  padding: 1em;
+  text-align: justify;
+}
+
+.button {
+
+	display: inline-block;
+	padding: 8px 16px;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+
+	color: white;
+	font: inherit;
+	
+	text-align: center;
+	text-decoration: none;
+
+	background-color: #333; /* Green */
+	border: none;
+	border-radius: 4px;
+
+	cursor: pointer;
+
+	/*-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;*/
+}
+
+.button:hover:enabled,
+.button:hover[enabled] {
+	background-color: #666;
+	/* text-shadow: 0 0 black; */
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+.button:active:enabled,
+.button:active[enabled] {
+	background-color: #888;
+	/*transform: translate(1px, 1px);*/
+}
+
+.button:disabled,
+.button[disabled]{
+
+	background-color: #AAA;
+	color: #666;
+}
+
+.buttonImg {
+	padding: 2px 4px;
+	margin: 0px 4px;
+	height: 1.5em;
+	-webkit-transition-duration: 0.1s;
+	/* Safari */
+	transition-duration: 0.1s;
+}
+
+.buttonImg:active:enabled,
+.buttonImg:active[enabled] {
+	background-color: #888;
+	transform: none;
+}
+
+.buttonImg:disabled,
+.buttonImg[disabled]{
+	/*padding: 0px 2px;
+ 	border: 0px dashed #333;*/
+
+	background-color: #AAA;
+	color: #666;
+}
+
+.outlined {
+
+	display: inline-block;
+	padding: 0px 4px;
+	margin: 0px 4px;
+
+	font-family: Consolas,monaco,monospace;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+
+	background-color: transparent;
+	border: 2px solid #888;
+	border-radius: 4px;
+
+}
+
+.hiddendiv {
+	display: none;
+}
+
+.buttonNoBG {
+
+	display: inline-block;
+	padding: 8px 16px;
+
+	color: white;
+	font-family: Consolas,monaco,monospace;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+
+	border: none;
+
+}
+
+/*
+.messagebox {
+	padding: 0;
+	border: 1px solid #444;
+	border-radius: 4px;
+	margin: 0.2em 0.2em;
+}
+*/
+
+.messagebox > #header {
+  
+	padding: 0;
+	margin: 0.2em 0.1em;  
+	font-size: 10px;
+	align-items: center;
+}
+
+.messagebox > #main {
+	margin: 1em 0.5em;
+	width: auto;
+	font-size: 12px;
+}
+
+.messagebox > #footer {
+
+	padding: 0;
+	margin: 0.2em 0.5em;
+
+	font-size: 10px;
+	color: gray;
+
+	align-items: center;
+}
+
+.messagebox #btrem {
+	cursor: pointer;
+}
+
+
+.message-icon {
+
+	height: 1.5em;
+	display: block;
+}
+
+.message-icon:focus {
+  outline: none;
+}
+
+/* *** NOTEBOOK *** ********************************* */
+.notebook {
+	padding: 0px;
+	margin: 0px;
+	margin-left: -1em;
+	margin-right: -1em;
+}
+
+.nb-header {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	justify-content: space-between;
+	-webkit-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	padding: 0px;
+	margin: 0px;
+
+	height: 2em;
+}
+
+.nb-main {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	justify-content: space-between;
+	-webkit-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	align-items: stretch;
+
+	padding: 0px;
+	margin: 0px;
+}
+
+.nb-body {
+	display: inline-block;
+	flex-grow: 2;
+	padding-left: 1em;
+	padding-right: 1em;
+	/* box-shadow: 0 0 3px 2px #7676764d; */
+}
+
+.nb-topleft {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-top-left.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	flex-basis: 2em;
+	height: 100%;
+}
+
+.nb-top {
+  display: inline-block;
+  background-image: url('/static/imgs/notebook-top.svg');
+  background-size: contain;
+  flex-grow: 2;
+  height: 100%;
+}
+
+.nb-topright {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-top-right.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	flex-basis: 2em;
+	height: 100%;
+}
+
+.nb-left {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-left.svg');
+	background-repeat: round;
+	background-size: contain;
+	min-width: 2em;
+	max-width: 2em;
+}
+
+.nb-right {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-right.svg');
+	background-size: contain;
+	min-width: 2em;
+	max-width: 2em;
+}
+
+.nb-bottomleft {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-bottom-left.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	flex-basis: 2em;
+	height: 100%;
+}
+
+.nb-bottomright {
+	display: inline-block;
+	background-image: url('/static/imgs/notebook-bottom-right.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	flex-basis: 2em;
+	height: 100%;
+}
+
+.nb-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+/* *** PANEL DATA EXPLORER *** **** */
+
+#panel-dataexplorer table {
+	table-layout: auto;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+/*
+#panel-dataexplorer td,
+#panel-dataexplorer th {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}*/
+
+#panel-dataexplorer thead th {
+	text-align: left;
+	text-transform: capitalize;
+}
+
+
+#panel-dataexplorer td {
+	word-wrap: break-word;
+}
+
+/*
+#panel-dataexplorer tr > #step { min-width: 5em; max-width: 5em; }
+#panel-dataexplorer tr > #name { min-width: 5em; }
+#panel-dataexplorer tr > #units { min-width: 2em; }
+#panel-dataexplorer tr > #type { width: 6em; }
+#panel-dataexplorer tr > #meta { width: 4em; text-align: center; }
+#panel-dataexplorer tr > #clear { width: 4em; text-align: center; }
+
+#panel-dataexplorer tr {
+	height: 2.5em;
+}
+*/
+
+/* ******************************** */
+
+
+/* *** PANEL METADATA EDITOR *** **** */
+
+[data-panel="metadata"] th { text-align: left; }
+[data-panel="metadata"] table { width: 100%; }
+[data-panel="metadata"] input { width: 100%; }
+
+/* ******************************** */
+
+
+
+
+
+
+
+
+
+
+.activimg {
+	cursor: pointer;
+}
+
+.clickImg {
+  cursor: pointer;
+  height: 1.2em;
+  margin: 0em 0.2em;
+}
+.clickImg:hover {
+	background-color: #0002;
+	box-shadow: 0 0 4px 0px #0002;
+}
+
+
+.pointable {
+	cursor: pointer;
+}
+
+
+.controlImg {
+	cursor: pointer;
+	margin: 0em 0.2em;
+	font-size: 24px;
+	height: 1em;
+	width: 1em;
+}
+
+.controlImg:hover {
+	background-color: #0002;
+	box-shadow: 0 0 4px 0px #0002;
+}
+
+
+
+.editer {margin-left: 1em;}
+.setter {
+	margin-left: 1em;
+}
+
+.setter {
+  margin-left: 1em;
+}
+
+.spacer {
+  flex-grow: 2;
+}
+
+span#auth-label {
+  padding-right: 1em;
+  min-width: 5em;
+}
+
+/* STEP HEADERS */
+.step > div#header,
+div#notebook-steps > div > div#header {
+
+	padding: 0px;
+	font-size: 11px;
+	color: #888;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-falex;
+	display: flex;
+
+	justify-content: space-between;
+	-webkit-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	align-items: center;
+
+}
+
+/* STEP FOOTER */
+.step > div#footer {
+
+	padding: 0px;
+	font-size: 11px;
+	color: #888;
+	height: 1em;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	justify-content: flex-start;
+	-webkit-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	align-items: center;
+
+}
+
+/* STEP FOOTER / delete iconbutton -- just to make it a bit bigger */
+.step > div#footer > img#deleter,
+div#notebook-steps > div > div#footer > img#deleter {
+	font-size: 14px;
+}
+
+
+
+div.step {
+	margin: 1em;
+}
+
+/* STEP MAIN BOX */
+.step > div#main,
+div#notebook-steps > div > div#main {
+	padding: 0.5em 0em;
+}
+
+
+
+
+/* *** FAKE TABLE - AFM EDIT INTERFACE *** */
+.fakecell {
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 0.3em;
+	padding-bottom: 1em;
+	border: 2px solid black;
+}
+
+.fakecell-noborder {
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 0.3em;
+	padding-bottom: 1em;
+}
+
+.fakecell-notop {
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 0.3em;
+	padding-bottom: 1em;
+	border: 2px solid black;
+	border-top: 0;
+}
+.fakecell-nobot {
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 0.3em;
+	padding-bottom: 1em;
+	border: 2px solid black;
+	border-bottom: 0;
+}
+/* **************************************** */
+
+
+
+/* TABLE IN A TABLESTEP */
+.regulator {
+	flex-grow: 2;
+	position: relative;
+	display: block;
+	min-height: 8em;
+	max-height: 20em;
+}
+
+#tbtbl,
+#thtbl {
+  border-collapse: collapse;
+  border: 1px solid black;
+  font-size: 11px;
+}
+
+.table-outer {
+  display: block;
+  position: absolute;
+  overflow: scroll;
+  max-width: 98%;
+  max-height: 100%;
+}
+
+.table-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
+  display: block;
+}
+
+.table-header thead {
+  background: #AAA;
+  border: 1px solid black;
+}
+
+.table-body {
+  float: left;
+  height: 100%;
+  width: inherit;
+  overflow-y: scroll;
+  padding-right: 16px;
+}
+
+.table-header th,
+.table-body td {
+  min-width: 10em;
+  max-width: 10em;
+  text-align: center;
+}
+
+table.tablearea td+td {
+  border-left: 1px solid black;
+}
+
+table.tablearea td + td { border-left:1px solid black; }
+table.tablearea th + th { border-left:1px solid black; }
+tr.rowborder td {
+	border-bottom:1pt solid black;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+
+
+td#info,
+th#info {
+  padding-left: 2em;
+}
+
+
+/* ******************************************************************* */ 
+
+
+
+
+.controlbox {
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid #333;
+  border-radius: 0px;
+  box-shadow: 0 0 4px 0px #c1c1c1;
+  padding: 0.5em;
+  margin: auto 0;
+}
+
+canvas#undefined {
+  width: 99% !important;
+  height: inherit !important;
+  margin: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+
+
+/* *** DATA TYPES PANEL *** */
+
+.datatypesbox {
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	margin: 0em 1em;
+	flex-wrap: wrap;
+
+}
+
+.typebox {
+
+	border: 3px solid #333;
+	border-radius : 4px;
+
+	padding: 1em;
+	margin: 1em;
+
+	flex-basis: 15em;
+	flex-direction: column;
+
+	cursor: pointer;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+
+}
+
+.typebox:hover,
+.typebox[hover] {
+	border: 3px solid #AAA;
+}
+
+
+.typebox > div#title {
+	text-align: center;
+}
+
+.typebox > img {
+	padding: 0.5em 0em;
+	align-self: center;
+	min-width: 5em;
+}
+
+.typebox > #info {
+	font-size: 12px;
+	text-align: justify;
+}
+
+
+
+/* *** INTERFACE PLOT EDIT *** */
+
+.interface#interface-plot-settings span#label {
+	width: 10em;
+}
+
+.interface#interface-plot-settings div#status {
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+/* *** INTERFACE DATA1D UPLOAD *** */
+
+.interface#interface-data1D-upload div#dataset > div {
+	align-items: center;
+}
+
+
+.interface#interface-data1D-upload div#params {
+	flex-grow: 2;
+}
+.interface#interface-data1D-upload div#params div {
+	align-items: center;
+}
+
+
+.interface#interface-data1D-upload span#label {
+	width: 6em;
+}
+
+.interface#interface-data1D-upload div#params input {
+	flex-grow: 2;
+}
+
+.interface#interface-data1D-upload div#controls {
+	flex-basis: 24px;
+	padding: 0em 1em;
+}
+.interface#interface-data1D-upload div#controls img {
+	height: 24px;
+}
+
+/* *** STEP DATA1D UPLOAD *** */
+
+.step[data-type="data1D"] #record > span {
+	padding-right: 1em;
+}
+
+.step[data-type="data1D"] #record > img {
+	padding-right: 1em;
+}
+
+.step[data-type="data1D"] #records {
+
+	padding: 0.5em 1em;
+	margin-right: 1em;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+
+
+/* ********** interfaces ****** */
+.interface#interface-line2D #linelist th {
+	text-align: left;
+}
+
+.interface#interface-line2D #linelist button {
+	height: 2em;
+}
+
+
+
+/* *** TASSEM's AFM stuff *** 
+.searchWrap {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+
+.afmEditContainer {
+  height: 100%;
+  display: flex;
+}
+
+.afmGraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+  flex-grow: 4;
+}
+
+.afmLinescanGraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  flex-grow: 4;
+}
+
+.afmTools {
+  display: flex;
+  height: 100%;
+  min-width: 20%;
+  justify-content: center;
+  align-items: center;
+}
+
+.afmTools table, .afmTools table td {
+  border: solid #a7a7a7;
+  border-collapse: collapse;
+}
+
+.afmTools table td {
+  margin: 2%;
+  font-size: 2em;
+}
+
+.afmTools table td:hover {
+  background-color: #7092b58c;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 2px 1px #5757578c;
+}
+
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-default div {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #033d77;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 29px;
+  left: 53px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 18px;
+  left: 50px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 9px;
+  left: 41px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 6px;
+  left: 29px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 9px;
+  left: 18px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 18px;
+  left: 9px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 29px;
+  left: 6px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 41px;
+  left: 9px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 50px;
+  left: 18px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 53px;
+  left: 29px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 50px;
+  left: 41px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 41px;
+  left: 50px;
+}
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+*/
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+	visibility: hidden; /* Hidden by default. Visible on click */
+	min-width: 250px; /* Set a default minimum width */
+	margin-left: -125px; /* Divide value of min-width by 2 */
+
+	color: black;
+	background-color: #FFF;
+	border: 2px solid black;
+	border-radius: 4px;
+	
+	text-align: center; /* Centered text */
+	
+	padding: 2em; /* Padding */
+	position: fixed; /* Sit on top of the screen */
+	z-index: 2000; /* Add a z-index if needed */
+	left: 50%; /* Center the snackbar */
+	bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+	visibility: visible; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+/*
+.searchBox {
+  border-radius: 2em;
+  border-style: hidden;
+  padding: 0.5em;
+  border: solid white;
+}
+
+.searchBox:hover {
+  box-shadow: 0 0 2px 0px black;
+}
+
+.searchBox:focus {
+  outline: none;
+  box-shadow: 0 0 2px 0px black;
+}
+
+
+
+.afmEditContainer {
+  height: 100%;
+  display: flex;
+}
+
+.afmGraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+  flex-grow: 4;
+}
+
+.afmLinescanGraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  flex-grow: 4;
+}
+
+.afmTools {
+  display: flex;
+  height: 100%;
+  min-width: 20%;
+  justify-content: center;
+  align-items: center;
+}
+
+.afmTools table, .afmTools table td {
+  border: solid #a7a7a7;
+  border-collapse: collapse;
+}
+
+.afmTools table td {
+  margin: 2%;
+  font-size: 2em;
+}
+
+.afmTools table td:hover {
+  background-color: #7092b58c;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 2px 1px #5757578c;
+}
+*/
+
+
+
+
+
+
+/* *** AFM edit interface *** */
+#interface-file-afmEdit #mainmenu span,
+#interface-file-afmEdit #mainmenu label {
+	margin-right: 1em;
+}
+
+
+/* *** slider for FFT  *** */
+
+[data-subtool] {
+	width: 100%;
+	font-size: 12px;
+	margin: 0.5em 0em;
+}
+[data-subtool] [data-slider="dualslider"] {
+	margin-left: 3em;
+	margin-right: 3em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+	font-size: 10px;
+	flex-grow: 2;
+}
+
+[data-subtool] [data-slider="dualslider"] .noUi-pips {
+	display: none;
+}
+
+.noUi-connect {
+    background: #666;
+}
+
+.noUi-horizontal .noUi-handle {
+	width: 2em;
+	height: 2em;
+	left: -1em;
+	top: -0.3em;
+}
+
+
+.noUi-handle::after, .noUi-handle::before {
+	top: 25%;
+	left: 45%;
+	height: 50%;
+}
+
+.noUi-handle::after {
+	left: 55%;
+}
+
+
+.searchWrap {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+
+
+
+/* *** SPINNER *** ********************************************************* */
+.spinner {
+	
+	border: 0.5em solid #DDD; /* Light grey */
+	border-top: 0.5em solid #666; /* Blue */
+	border-radius: 50%;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+.spinner-3 {
+	width: 3em;
+	height: 3em;
+	display: none;
+}
+
+.spinner-2 {
+	width: 2em;
+	height: 2em;
+	display: none;
+}
+
+.spinner-1p2 {
+	width: 1.2em;
+	height: 1.2em;
+	display: none;
+}
+
+.spinnersmall {
+	
+	border: 0.25em solid #DDD; /* Light grey */
+	border-top: 0.25em solid #666; /* Blue */
+	border-radius: 50%;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+/*****************************************************************************/
