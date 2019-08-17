@@ -1,7 +1,8 @@
 
 <div class="navbar">
 
-	<img class="clickImg" src="/static/imgs/button.logo.svg" onclick="window.location.href='/login';" title="Cassandra Home Page"/>
+	<!--<img class="clickImg" src="/static/imgs/button.logo.svg" onclick="window.location.href='/login';" title="Cassandra Home Page"/>-->
+	<H1>MIRA</H1>
 
 
 	<span id="separator"></span>
@@ -10,24 +11,21 @@
 {%- if current_user.is_authenticated %}
 	
 
-	<div {% if active_page == 'docs' %} class="active"{% endif %} onclick="window.location.href='/docs/';" title="Online user manual">
-		<span>Manual</span>
-		<img src="/static/imgs/button.docs.svg" />
-	</div>	
-
-	<div onclick="window.location.href='/logout';" title="Logout from the system">
-		<span>Logout</span>
-		<img src="/static/imgs/button.logout.svg" />
-	</div>	
-
 
 {%- else %}
 	
+	<div {% if active_page == 'upload' %} class="active"{% endif %} onclick="window.location.href='/upload';" title="Upload an image">
+		<span>Upload</span>
+		<img src="/static/imgs/button.upload.svg" />
+	</div>	
 
-	<div {% if active_page == 'login' %} class="active"{% endif %} onclick="window.location.href='/login';" title="Login form">
-		<span>Login</span>
-		<img class="clickImg" src="/static/imgs/button.login.svg"/>
-	</div>
+
+	<div {% if active_page == 'search' %} class="active"{% endif %} onclick="window.location.href='/search';" title="Look for images">
+		<span>Search</span>
+		<img src="/static/imgs/button.search.svg" />
+	</div>	
+
+
 
 {%- endif %}
 

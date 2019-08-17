@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+
+{% set active_page = "search" %}
+
+
+{% block content %}
+
+MIRA search page.<br><br>
+
+<div class="flexcol">
+	<div class="flexrow">
+		<span style="width: 8em;">tags:</span>
+		<input id="tags" type="text">
+	</div>
+	<div class="flexrow">
+		<span style="width: 8em;">location:</span>
+		<input id="loc" type="text">
+	</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+
+{% set active_page = "upload" %}
+
+
+{% block content %}
+
+MIRA image upload page.<br><br>
+<div class="flexcol">
+	<div class="flexrow">
+		<span>Select an image to upload: </span>
+		<input id="file" type="file">
+	</div>
+	<div class="flexrow" title="comma separated tags">
+		<span style="width: 8em;">tags:</span>
+		<input id="tags" type="text" >
+	</div>
+	<div class="flexrow">
+		<span style="width: 8em;">location:</span>
+		<input id="loc" type="text">
+	</div>
+
+
+	<div class="flexrow">
+		<button id="btOK" onclick="mira_upload();">upload</button>
+	</div>
+
+</div>
+
+{% endblock %}

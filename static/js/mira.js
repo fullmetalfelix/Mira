@@ -1,5 +1,7 @@
-var util_snackbars = [];
 
+
+/// Snackbar messages
+var util_snackbars = [];
 function snackBar(message, options={timeout: 3000, error: false}) {
 
 	// Get the snackbar DIV

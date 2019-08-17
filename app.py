@@ -31,7 +31,6 @@ app.jinja_env.line_statement_prefix = '%'
 # the main templates
 template_folders = ["./templates"]
 
-
 jinjaloader = jinja2.ChoiceLoader([	app.jinja_loader, jinja2.FileSystemLoader(template_folders), ])
 app.jinja_loader = jinjaloader
 
