@@ -8,9 +8,9 @@ class Config(object):
 	
 	DEBUG = True
 
-	DATABASE = MongoClient('mongodb://mira:mira@host')['db']
+	DATABASE = MongoClient('mongodb://mira:mira@host')['mira']
 
-	PUBLIC_URL =	"http://mira.rahtiapp.fi/"
+	PUBLIC_URL =	"https://mira.rahtiapp.fi/"
 	PUBLIC_NAME =	"Mira"
 	
 
