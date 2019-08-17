@@ -10,7 +10,8 @@ class Config(object):
 
 	DATABASE = MongoClient('mongodb://mira:mira@host')['mira']
 
-	PUBLIC_URL =	"https://mira.rahtiapp.fi/"
+	#PUBLIC_URL =	"https://mira.rahtiapp.fi/"
+	PUBLIC_URL =	"http://localhost:5000/"
 	PUBLIC_NAME =	"Mira"
 	
 

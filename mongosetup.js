@@ -2,31 +2,17 @@
 use admin
 
 db.createUser({
-	user: "flasktester",
-	pwd: "flasker00",
-	roles: [{role: "readWrite", db: "flasktest"}]
+	user: "mira",
+	pwd: "mira",
+	roles: [{role: "readWrite", db: "mira"}]
 })
 
-use flasktest
+use mira
 
+db.createCollection('images')
+db.createCollection('analysis')
+db.createCollection('crops')
 db.createCollection('userinfo')
-db.createCollection('groupinfo')
-db.createCollection('messages')
-db.createCollection('notebooks')
-db.createCollection('steps')
-db.createCollection('archive')
-db.createCollection('fs.files')
-db.createCollection('fs.chunks')
-db.createCollection('news')
-db.createCollection('tokens')
-
-db.createCollection('samples')
-db.createCollection('consumables')
-db.createCollection('instruments')
-db.createCollection('reviews')
-
-db.createCollection('datatypes')
-db.createCollection('scripts')
 
 db.userinfo.insertOne({
 	"name": "federif1",
@@ -38,7 +24,5 @@ db.userinfo.insertOne({
 	"tel1" : "",
 	"tel2" : "",
 	"lastlogin" : ISODate("2019-07-18T06:39:32.656Z"),
-	"hiddenmsg" : [ ],
-	"grouprequests" : [ ],
 	"isAdmin" : true
 })

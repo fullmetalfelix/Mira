@@ -10,11 +10,8 @@ from config import Config
 
 from pymongo import MongoClient
 import gridfs
-
 from momentjs import momentjs
-
 import glob
-
 
 
 app = Flask(__name__)
