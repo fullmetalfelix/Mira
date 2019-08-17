@@ -8,7 +8,7 @@ class Config(object):
 	
 	DEBUG = True
 
-	DATABASE = MongoClient('mongodb://flasktester:flasker00@nanolayers.dyndns.org')['flasktest']
+	DATABASE = MongoClient('mongodb://user:pwd@host')['db']
 
 	PUBLIC_URL =	"http://localhost:5000/"
 	PUBLIC_NAME =	"Mira"
