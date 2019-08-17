@@ -53,7 +53,7 @@ function mira_file_onchange() {
 			dataURL: event.target.result,
 			tags: $('#tags').val().trim(),
 			loc: $('#loc').val().trim(),
-			mime: event.target.result.split(';base64,', 1);
+			mime: event.target.result.split(';base64,', 1)
 		};
 
 
