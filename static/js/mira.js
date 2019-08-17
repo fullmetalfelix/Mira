@@ -49,7 +49,7 @@ function mira_file_onchange() {
 	reader.onload = function(event) {
 
 		mira_data = {
-			original: file.filename,
+			original: file.name,
 			dataURL: event.target.result,
 			tags: $('#tags').val().trim(),
 			loc: $('#loc').val().trim(),
@@ -69,6 +69,8 @@ function mira_upload() {
 	$('.spinner').show();
 	snackBar('uploading...');
 	$('button').prop('disabled', true);
+
+	console.log('upload:'); console.log(mira_data);
 
 	$.ajax({
 		url: '/upload/img',
