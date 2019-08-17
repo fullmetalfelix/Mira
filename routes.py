@@ -98,7 +98,7 @@ def upload_post():
 	data = request.json
 
 	entry = {
-		'filename': data['filename'],
+		'original': data['original'],
 		'tags': [t.strip() for t in data['tags'].split(',')],
 		'loc': data['loc'],
 		'file': data['dataURL'] # the image is stores as its base64 dataURL - might take a bit more space!

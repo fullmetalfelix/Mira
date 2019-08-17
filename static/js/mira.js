@@ -49,7 +49,7 @@ function mira_file_onchange() {
 	reader.onload = function(event) {
 
 		mira_data = {
-			filename: file.filename,
+			original: file.filename,
 			dataURL: event.target.result,
 			tags: $('#tags').val().trim(),
 			loc: $('#loc').val().trim(),
