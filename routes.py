@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Mira.app import app, lm, db
+from app import app, lm, db
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime
