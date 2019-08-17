@@ -8,7 +8,7 @@ class Config(object):
 	
 	DEBUG = True
 
-	DATABASE = MongoClient('mongodb://mira:mira@mongo-mira')['mira']
+	DATABASE = MongoClient('mongodb://mira:mira@mongo-mira?authSource=mira')['mira']
 
 	#PUBLIC_URL =	"https://mira.rahtiapp.fi/"
 	PUBLIC_URL =	"http://localhost:5000/"
