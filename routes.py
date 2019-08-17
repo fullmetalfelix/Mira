@@ -97,20 +97,17 @@ def upload_post():
 
 	data = request.json
 
-	filename = secure_filename(data['file']['filename'])
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
 	entry = {
 		'original': data['filename'],
 		'tags': [t.strip() for t in data['tags'].split(',')],
 		'loc': data['loc'],
-		'file': data['dataURL']
+		'file': data['dataURL'] # the image is stores as its base64 dataURL - might take a bit more space!
 	}
 
 	# place the entry in the database and retrieve the ID for no reason
 	imgID = db.images.insert_one(entry).inserted_id
 
-
+	# give an answer to the client so it can move on with its life
 	answer = {}
 	answer['type'] = 'success'
 	answer['message'] = 'image uploaded'
