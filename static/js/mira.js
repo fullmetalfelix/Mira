@@ -34,3 +34,66 @@ function snackBar(message, options={timeout: 3000, error: false}) {
 
 
 
+var mira_data = null;
+function mira_file_onchange() {
+
+	let reader = new FileReader();
+	let file = $('#file')[0].files[0];
+
+	$('button').prop('disabled', true);
+
+	reader.onerror = function() {
+		snackBar('Unable to read ' + file.name);
+	};
+
+	reader.onload = function(event) {
+
+		mira_data = {
+			original: file.filename,
+			dataURL: event.target.result,
+			tags: $('#tags').val().trim(),
+			loc: $('#loc').val().trim(),
+			mime: event.target.result.split(';base64,', 1);
+		};
+
+
+		$('button').prop('disabled', false);
+		snackBar('file ready');
+	};
+	reader.readAsDataURL(file);
+}
+
+
+function mira_upload() {
+
+	$('.spinner').show();
+	snackBar('uploading...');
+	$('button').prop('disabled', true);
+
+	$.ajax({
+		url: '/upload/img',
+		data: JSON.stringify(mira_data),
+		contentType: 'application/json;charset=UTF-8',
+		type: 'POST',
+		success: function(response) {
+
+			response = JSON.parse(response);
+
+			// show message and unlocks the UI
+			$('.spinner').hide();
+			snackBar(response.message);
+			mira_data = null;
+
+		},
+		error: function(error) {
+			
+			$('.spinner').hide();
+			$('button').prop('disabled', false);
+			snackBar('S3RVER ERR0R', {error: true}); console.log(error);
+		}
+	});
+
+}
+
+
+

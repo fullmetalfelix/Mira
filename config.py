@@ -8,11 +8,13 @@ class Config(object):
 	
 	DEBUG = True
 
-	DATABASE = MongoClient('mongodb://user:pwd@host')['db']
+	DATABASE = MongoClient('mongodb://mira:mira@host')['db']
 
-	PUBLIC_URL =	"http://localhost:5000/"
+	PUBLIC_URL =	"http://mira.rahtiapp.fi/"
 	PUBLIC_NAME =	"Mira"
 	
+
+	UPLOAD_FOLDER = './archive/'
 	DOCS_LOC = 'docs/'
 	
 	

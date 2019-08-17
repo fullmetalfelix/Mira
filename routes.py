@@ -2,6 +2,7 @@
 
 from Mira.app import app, lm, db
 from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
 from datetime import datetime
 
 import flask
@@ -94,8 +95,26 @@ def upload():
 @app.route('/upload/img', methods=['POST'])
 def upload_post():
 
+	data = request.json
 
-	return ""
+	filename = secure_filename(data['file']['filename'])
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+	entry = {
+		'original': data['filename'],
+		'tags': [t.strip() for t in data['tags'].split(',')],
+		'loc': data['loc'],
+		'file': data['dataURL']
+	}
+
+	# place the entry in the database and retrieve the ID for no reason
+	imgID = db.images.insert_one(entry).inserted_id
+
+
+	answer = {}
+	answer['type'] = 'success'
+	answer['message'] = 'image uploaded'
+	return dumps(answer)
 
 
 

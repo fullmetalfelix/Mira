@@ -6,11 +6,16 @@
 
 {% block content %}
 
-MIRA image upload page.<br><br>
+<div class="flexbox centered">
+	<H2>MIRA image upload</H2>
+	<span id="separator"></span>
+	<div id="mainspinner" class="spinner" style="width: 2em; height: 2em; display: none;"></div>
+</div>
+
 <div class="flexcol">
 	<div class="flexrow">
 		<span>Select an image to upload: </span>
-		<input id="file" type="file">
+		<input id="file" type="file" onchange="mira_file_onchange();">
 	</div>
 	<div class="flexrow" title="comma separated tags">
 		<span style="width: 8em;">tags:</span>
@@ -23,7 +28,7 @@ MIRA image upload page.<br><br>
 
 
 	<div class="flexrow">
-		<button id="btOK" onclick="mira_upload();">upload</button>
+		<button id="btOK" onclick="mira_upload();" disabled="">upload</button>
 	</div>
 
 </div>
