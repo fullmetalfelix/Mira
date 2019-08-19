@@ -198,11 +198,13 @@ function mira_show_refresh() {
 function mira_show() {
 
 	mira_show_resize();
+	mira_show_listcrops();
+
 
 	$('.spinner').hide();
 }
 
-function mira_show_resize() {
+function mira_show_resize(selectedcrop=null) {
 
 	let cdiv = document.getElementById('canvasdiv');
 	let canvas = document.getElementById('canvas');
@@ -235,23 +237,92 @@ function mira_show_resize() {
 
 
 			ctx.beginPath();
-			ctx.lineWidth = "2";
-			ctx.strokeStyle = "red";
+			if(selectedcrop != null) {
+				if(selectedcrop != i) {
+					ctx.lineWidth = "2";
+					ctx.strokeStyle = "red";
+				}
+				else {
+					ctx.lineWidth = "4";
+					ctx.strokeStyle = "green";
+				}
+			} else {
+				ctx.lineWidth = "2";
+				ctx.strokeStyle = "red";
+			}
+			
 			ctx.rect(coords[0], coords[1], coords[2], coords[3]); 
 			ctx.stroke();
 		});
-
-
-
 	};
 	img.src = imagedata.file;
 }
 
+function mira_show_listcrops() {
+
+	let container = $('#croptable tbody');
+	let template = container.find('[data-template="crop"]');
+	container.find('[data-crop]').remove();
+
+	// for crops
+	imagedata.crops.forEach((c,i) => {
+
+		let div = template.clone();
+		div.removeAttr('data-template');
+		div.attr('data-crop', c._id['$oid']);
+
+		div.find('#ID').text(i);
+		div.find('#detector').text(c.detector);
+		div.find('#cls').text(c.animal);
+
+		div.show();
+		container.append(div);
+	});
+}
 
 function mira_show_cropinfo(control, show) {
 
+	let cropIndex = null;
+	if(show == true)
+		cropIndex = jQuery(control).closest('[data-crop]').find('#ID').text();
+
+	mira_show_resize(cropIndex);
+}
+
+
+
+function mira_show_scan() {
+
+	
+	$('.spinner').show();
+	snackBar('detecting beasts...');
+	$('button').prop('disabled', true);
+
+
+	$.getJSON('/show/'+imageID+'/megascan', function(response) {
+		console.log('megadetect done');
+	})
+	.done(function(response) {
+		
+		snackBar(response.message);
+		if(response.type != 'success') return;
+
+		imagedata.crops = response.crops;
+		mira_show_resize();
+
+	})
+	.fail(function() {
+		snackBar('SERVER ERROR!', {error: true});
+	})
+	.always(function() {
+		$('.spinner').hide();
+		$('button').prop('disabled', false);
+	});
 
 }
+
+
+
 
 
 
