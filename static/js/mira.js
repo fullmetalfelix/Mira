@@ -215,8 +215,8 @@ function mira_show_resize(selectedcrop=null) {
 
 		let aspect = img.width / img.height;
 
-		console.log(canvas.width + " " + canvas.height);
-		console.log(img.width + " " + img.height);
+		//console.log(canvas.width + " " + canvas.height);
+		//console.log(img.width + " " + img.height);
 		canvas.width = cdiv.clientWidth;
 		canvas.height = canvas.width / aspect; //cdiv.clientHeight;
 		ctx.drawImage(img, 
@@ -227,10 +227,10 @@ function mira_show_resize(selectedcrop=null) {
 		imagedata.crops.forEach((c,i) => {
 
 			let coords = JSON.parse(JSON.stringify(c.coords));
-			coords[0] *= canvas.width;
-			coords[2] *= canvas.width;
-			coords[1] *= canvas.height;
-			coords[3] *= canvas.height;
+			coords[0] *= canvas.height
+			coords[1] *= canvas.width;
+			coords[2] *= canvas.height;
+			coords[3] *= canvas.width;
 
 			coords[2] -= coords[0];
 			coords[3] -= coords[1];
@@ -251,7 +251,7 @@ function mira_show_resize(selectedcrop=null) {
 				ctx.strokeStyle = "red";
 			}
 			
-			ctx.rect(coords[0], coords[1], coords[2], coords[3]); 
+			ctx.rect(coords[1], coords[0], coords[3], coords[2]); 
 			ctx.stroke();
 		});
 	};
