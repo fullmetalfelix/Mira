@@ -38,7 +38,6 @@ nanonispy==1.0.5
 numpy==1.16.4
 packaging==19.0
 Pillow==6.1.0
-pkg-resources==0.0.0
 protobuf==3.9.1
 pycparser==2.19
 Pygments==2.4.2
