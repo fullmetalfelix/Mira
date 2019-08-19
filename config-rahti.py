@@ -17,4 +17,4 @@ class Config(object):
 	UPLOAD_FOLDER = './archive/'
 	DOCS_LOC = 'docs/'
 	
-	
+	MEGA_MODEL = None

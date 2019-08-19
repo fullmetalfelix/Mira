@@ -1,25 +1,12 @@
 
-from Mira.app import msdetector
+from Mira.app import app
 from PIL import Image
 from io import BytesIO
 import base64
 from datetime import datetime
 
-
-#import argparse
-#import glob
-#import os
-#import sys
-#import time
-
 import PIL
-#import humanfriendly
-import matplotlib
-matplotlib.use('TkAgg')
-import matplotlib.image as mpimg
-import matplotlib.patches as patches
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+
 import numpy as np
 import tensorflow as tf
 from tqdm import tqdm
@@ -28,7 +15,7 @@ import random
 
 
 MEGA_CONFIDENCE_THRESHOLD = 0.85
-
+MEGA_MODEL = None
 
 
 
@@ -149,7 +136,7 @@ def MegaScan(image):
 
 
 
-	dataurl = image['file']; print(dataurl[0:25])
+	dataurl = image['file']; # print(dataurl[0:25])
 	dataurl = dataurl.split(';base64,')[1]
 	dataurl = base64.b64decode(dataurl)
 
@@ -165,8 +152,22 @@ def MegaScan(image):
 		imgMS = imgMS[:,:,0:3]
 
 	
+	if app.config['MEGA_MODEL'] == None:
+		print('loading TF...')
+		import tensorflow as tf
 
-	boxes,scores,classes,images = generate_detections(msdetector, imgMS)
+		# LOADS THE MS MEGADETECTOR
+		app.config['MEGA_MODEL'] = tf.compat.v1.Graph()
+		with app.config['MEGA_MODEL'].as_default():
+			od_graph_def = tf.compat.v1.GraphDef()
+			with tf.io.gfile.GFile('./models/megadetector_v3.pb', 'rb') as fid:
+				serialized_graph = fid.read()
+				od_graph_def.ParseFromString(serialized_graph)
+				tf.import_graph_def(od_graph_def, name='')
+		print('loaded!')
+
+
+	boxes,scores,classes,images = generate_detections(app.config['MEGA_MODEL'], imgMS)
 	boxes = boxes[0]
 	scores = scores[0]
 	classes = classes[0]
@@ -176,7 +177,7 @@ def MegaScan(image):
 	crops = []
 	for i in range(len(boxes)):
 
-		print(boxes[i], scores[i], classes[i])
+		#print(boxes[i], scores[i], classes[i])
 
 		if scores[i] < MEGA_CONFIDENCE_THRESHOLD: continue
 
