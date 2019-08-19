@@ -8,9 +8,9 @@ class Config(object):
 	
 	DEBUG = True
 
-	DATABASE = MongoClient('mongodb://mira:mira@nanolayers.dyndns.org')['mira']
+	DATABASE = MongoClient('mongodb://mira:mira@mongo-mira', authSource='mira')['mira']
 
-	PUBLIC_URL =	"http://localhost:5000/"
+	PUBLIC_URL =	"https://mira.rahtiapp.fi/"
 	PUBLIC_NAME =	"Mira"
 	
 

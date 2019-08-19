@@ -6,7 +6,12 @@
 
 {% block content %}
 
-MIRA search page.<br><br>
+<div class="flexbox centered">
+	<H2>MIRA image search system</H2>
+	<span id="separator"></span>
+	<div id="mainspinner" class="spinner" style="width: 2em; height: 2em; display: none;"></div>
+</div>
+
 
 <div class="flexcol">
 	<div class="flexrow">
@@ -18,6 +23,31 @@ MIRA search page.<br><br>
 		<input id="loc" type="text">
 	</div>
 
+
+	<div class="flexrow">
+		<button id="btOK" class="button" onclick="mira_search();">search</button>
+	</div>
+
 </div>
+
+
+<table id="results" class="simple" style="width: 100%; table-layout: fixed;">
+	<thead><tr>
+		<th>uploaded</th>
+		<th>filename</th>
+		<th>asd</th>
+		<th>inspect</th>
+	</tr></thead>
+
+	<tbody>
+		<tr data-template="img" style="display: none;">
+			<td id="uptime"></td>
+			<td id="filename"></td>
+			<td id="asd"></td>
+			<td id="inspect"><img class="controlImg" src="/static/imgs/icon.search.svg" onclick="mira_search_open(this);"></td>
+		</tr>
+	</tbody>
+
+</table>
 
 {% endblock %}

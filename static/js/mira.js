@@ -34,6 +34,9 @@ function snackBar(message, options={timeout: 3000, error: false}) {
 
 
 
+/* *** UPLOAD PAGE *** ****************************************************** */
+
+
 var mira_data = null;
 function mira_file_onchange() {
 
@@ -96,6 +99,165 @@ function mira_upload() {
 	});
 
 }
+
+/* ************************************************************************** */
+
+/* *** SEARCH PAGE *** ****************************************************** */
+
+
+function mira_search() {
+
+	let request = {
+		loc: $('#loc').val().trim(),
+		tags: $('#tags').val().trim(),
+	}
+
+	$('.spinner').show();
+	snackBar('searching...');
+	$('button').prop('disabled', true);
+
+
+	$.ajax({
+		url: '/search/request',
+		data: JSON.stringify(request),
+		contentType: 'application/json;charset=UTF-8',
+		type: 'POST',
+		success: function(response) {
+
+			response = JSON.parse(response);
+
+			// show message and unlocks the UI
+			$('.spinner').hide();
+			$('button').prop('disabled', false);
+			snackBar(response.message);
+
+			if(response.type == 'success')
+				mira_search_list(response.results);
+
+		},
+		error: function(error) {
+			
+			$('.spinner').hide();
+			$('button').prop('disabled', false);
+			snackBar('S3RVER ERR0R', {error: true}); console.log(error);
+		}
+	});
+}
+
+function mira_search_list(results) {
+
+	let container = $('#results tbody');
+	container.find('[data-img]').remove();
+
+	let template = container.find('[data-template="img"]');
+
+	results.forEach((o,i) => {
+
+		let div = template.clone();
+		div.removeAttr('data-template');
+		div.attr('data-img', o._id['$oid']);
+		div.show();
+
+		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
+		div.find('#filename').text(o.original);
+
+		container.append(div);
+	})
+
+}
+
+
+
+function mira_search_open(control) {
+
+	let imgID = jQuery(control).closest('tr').attr('data-img');
+	window.location.href = "/show/" + imgID;
+}
+
+/* ************************************************************************** */
+
+/* *** IMAGE SHOW SYSTEM *** ************************************************ */
+
+function mira_show_refresh() {
+
+	$('.spinner').show();
+	snackBar('refreshing...');
+
+	$.getJSON('/show/'+imageID+'/refresh', { },
+	
+		function(response) {
+
+			imagedata = response.image;
+			mira_show();
+		}
+	);
+
+}
+
+
+function mira_show() {
+
+	mira_show_resize();
+
+	$('.spinner').hide();
+}
+
+function mira_show_resize() {
+
+	let cdiv = document.getElementById('canvasdiv');
+	let canvas = document.getElementById('canvas');
+	let ctx = canvas.getContext('2d');
+
+	let img = new Image;
+	img.onload = () => { 
+
+		let aspect = img.width / img.height;
+
+		console.log(canvas.width + " " + canvas.height);
+		console.log(img.width + " " + img.height);
+		canvas.width = cdiv.clientWidth;
+		canvas.height = canvas.width / aspect; //cdiv.clientHeight;
+		ctx.drawImage(img, 
+			0,0, img.width, img.height,
+			0,0, canvas.width, canvas.height);
+
+		// for crops
+		imagedata.crops.forEach((c,i) => {
+
+			let coords = JSON.parse(JSON.stringify(c.coords));
+			coords[0] *= canvas.width;
+			coords[2] *= canvas.width;
+			coords[1] *= canvas.height;
+			coords[3] *= canvas.height;
+
+			coords[2] -= coords[0];
+			coords[3] -= coords[1];
+
+
+			ctx.beginPath();
+			ctx.lineWidth = "2";
+			ctx.strokeStyle = "red";
+			ctx.rect(coords[0], coords[1], coords[2], coords[3]); 
+			ctx.stroke();
+		});
+
+
+
+	};
+	img.src = imagedata.file;
+}
+
+
+function mira_show_cropinfo(control, show) {
+
+
+}
+
+
+
+/* ************************************************************************** */
+
+
 
 
 
