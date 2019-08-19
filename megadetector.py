@@ -50,25 +50,25 @@ def generate_detections(detection_graph, images):
 	    
 		with tf.compat.v1.Session(graph=detection_graph) as sess:
 
-			for iImage,imageNP in tqdm(enumerate(images)): 
+			iImage = 0
+			imageNP = images[0]
 
-				imageNP_expanded = np.expand_dims(imageNP, axis=0)
-				image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-				box = detection_graph.get_tensor_by_name('detection_boxes:0')
-				score = detection_graph.get_tensor_by_name('detection_scores:0')
-				clss = detection_graph.get_tensor_by_name('detection_classes:0')
-				num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+			imageNP_expanded = np.expand_dims(imageNP, axis=0)
+			image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
+			box = detection_graph.get_tensor_by_name('detection_boxes:0')
+			score = detection_graph.get_tensor_by_name('detection_scores:0')
+			clss = detection_graph.get_tensor_by_name('detection_classes:0')
+			num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
-				# Actual detection
-				(box, score, clss, num_detections) = sess.run(
-					[box, score, clss, num_detections],
-					feed_dict={image_tensor: imageNP_expanded})
+			# Actual detection
+			(box, score, clss, num_detections) = sess.run(
+				[box, score, clss, num_detections],
+				feed_dict={image_tensor: imageNP_expanded})
 
-				boxes.append(box)
-				scores.append(score)
-				classes.append(clss)
+			boxes.append(box)
+			scores.append(score)
+			classes.append(clss)
 
-			# ...for each image                
 
 		# ...with tf.Session
 
