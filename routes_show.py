@@ -47,10 +47,22 @@ def image_get(imageID):
 	# TODO: check permissions
 
 	imginfo['crops'] = []
-	
+
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
 	answer['image'] = imginfo
 	return dumps(answer)
 
 
+
+## Delete an image from the database
+#
+@app.route('/show/delete/<imageID>', methods=['GET'])
+def image_delete(imageID):
+
+	imgID = ObjectId(imageID)
+
+	db.crops.remove({'src': imgID})
+	db.images.remove({'_id': imgID})
+
+	return redirect('/')

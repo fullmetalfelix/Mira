@@ -47,7 +47,8 @@ $(window).on('resize', mira_show_resize);
 		<center><H4>CROPS</H4></center>
 		<table class="simple">
 			<thead><tr>
-				
+				<th>asd</th>
+				<th>asd</th>
 			</tr></thead>
 			<tbody>
 				<tr data-template="crop" style="display:none;">
@@ -63,7 +64,9 @@ $(window).on('resize', mira_show_resize);
 		<div id="separator"></div>
 		<div class="flexrow">
 			
-			<button class="button" onclick="mira_show_refresh();">refresh</button>
+			<button class="button" onclick="mira_show_refresh();" title="reload the image">refresh</button>
+			<span id="separator"></span>
+			<button class="button" onclick="mira_show_delete();" title="delete the image from the database">delete</button>
 		</div>
 	</div>
 

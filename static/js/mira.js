@@ -255,6 +255,12 @@ function mira_show_cropinfo(control, show) {
 
 
 
+function mira_show_delete() {
+
+	window.location.href = '/show/delete/' + imageID;
+}
+
+
 /* ************************************************************************** */
 
 
