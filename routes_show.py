@@ -15,6 +15,7 @@ import pymongo, bson, json
 from bson.objectid import ObjectId
 from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 
+from megadetector import *
 
 
 ## Image visualisation page
@@ -46,7 +47,7 @@ def image_get(imageID):
 
 	# TODO: check permissions
 
-	imginfo['crops'] = []
+	imginfo['crops'] = list(db.crops.find({'src': ObjectId(imageID)}))
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
@@ -66,3 +67,32 @@ def image_delete(imageID):
 	db.images.remove({'_id': imgID})
 
 	return redirect('/')
+
+
+
+@app.route('/show/<imageID>/megascan', methods=['GET'])
+def image_test(imageID):
+
+	answer = {}
+
+	imgID = ObjectId(imageID)
+	img = db.images.find_one({'_id': imgID})
+	if not img:
+		answer['type'] = 'error'
+		answer['message'] = 'image not found'
+		return 'error'
+
+
+	# delete all crops previously found for this image
+	db.crops.remove({'src': imgID})
+
+	# rescan with MS megascanner 3
+	crops = MegaScan(img)
+	db.crops.insert_many(crops)
+
+
+	answer['type'] = 'success'
+	answer['message'] = 'scan completed'
+	answer['crops'] = list(db.crops.find({'src': imgID}))
+
+	return dumps(answer)

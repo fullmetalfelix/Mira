@@ -7,6 +7,7 @@ from flask_mail import Mail
 import jinja2
 
 from config import Config
+import tensorflow as tf
 
 from pymongo import MongoClient
 import gridfs
@@ -44,11 +45,23 @@ db = Config.DATABASE
 fs = gridfs.GridFS(db)
 
 
+# LOADS THE MS MEGADETECTOR
+msdetector = tf.compat.v1.Graph()
+with msdetector.as_default():
+	od_graph_def = tf.compat.v1.GraphDef()
+	with tf.io.gfile.GFile('./models/megadetector_v3.pb', 'rb') as fid:
+		serialized_graph = fid.read()
+		od_graph_def.ParseFromString(serialized_graph)
+		tf.import_graph_def(od_graph_def, name='')
+
+
+
 # import all routes
 import routes
 import routes_search
 import routes_upload
 import routes_show
+
 
 @app.context_processor
 def utility_processor():
