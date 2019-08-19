@@ -15,7 +15,7 @@ import pymongo, bson, json
 from bson.objectid import ObjectId
 from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 
-from megadetector import *
+import megadetector
 
 
 ## Image visualisation page
@@ -87,7 +87,7 @@ def image_test(imageID):
 	db.crops.remove({'src': imgID})
 
 	# rescan with MS megascanner 3
-	crops = MegaScan(img)
+	crops = megadetector.MegaScan(img)
 	db.crops.insert_many(crops)
 
 

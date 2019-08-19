@@ -8,14 +8,12 @@ from datetime import datetime
 import PIL
 
 import numpy as np
+import os
 import tensorflow as tf
 from tqdm import tqdm
 import random
 
 
-
-MEGA_CONFIDENCE_THRESHOLD = 0.85
-MEGA_MODEL = None
 
 
 
@@ -50,7 +48,7 @@ def generate_detections(detection_graph, images):
 
 	with detection_graph.as_default():
 	    
-		with tf.Session(graph=detection_graph) as sess:
+		with tf.compat.v1.Session(graph=detection_graph) as sess:
 
 			for iImage,imageNP in tqdm(enumerate(images)): 
 
@@ -134,8 +132,6 @@ def generate_detections(detection_graph, images):
 
 def MegaScan(image):
 
-
-
 	dataurl = image['file']; # print(dataurl[0:25])
 	dataurl = dataurl.split(';base64,')[1]
 	dataurl = base64.b64decode(dataurl)
@@ -153,8 +149,14 @@ def MegaScan(image):
 
 	
 	if app.config['MEGA_MODEL'] == None:
+
 		print('loading TF...')
+
 		import tensorflow as tf
+		
+		tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+		os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 
 		# LOADS THE MS MEGADETECTOR
 		app.config['MEGA_MODEL'] = tf.compat.v1.Graph()
@@ -172,6 +174,8 @@ def MegaScan(image):
 	scores = scores[0]
 	classes = classes[0]
 	ts = datetime.utcnow()
+
+	MEGA_CONFIDENCE_THRESHOLD = 0.85
 
 	# filter the sure boxes
 	crops = []
