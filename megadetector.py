@@ -180,6 +180,7 @@ def MegaScan(image):
 		tmp[:,:,1] = imgMS
 		tmp[:,:,2] = imgMS
 		imgMS = tmp
+		
 	else:
 
 		nChannels = imgMS.shape[2]
