@@ -186,12 +186,19 @@ function mira_show_refresh() {
 	$.getJSON('/show/'+imageID+'/refresh', { },
 	
 		function(response) {
-
+			console.log(response.type);
+			snackBar(response.message);
+			
 			imagedata = response.image;
 			mira_show();
+			if(response.type == 'inprogress') {
+				$('#btScan').prop('disabled', true);
+			}
+			else {
+				$('#btScan').prop('disabled', false);
+			}
 		}
 	);
-
 }
 
 
@@ -258,6 +265,7 @@ function mira_show_resize(selectedcrop=null) {
 	img.src = imagedata.file;
 }
 
+// constructs the list of crops in the table
 function mira_show_listcrops() {
 
 	let container = $('#croptable tbody');
@@ -279,6 +287,7 @@ function mira_show_listcrops() {
 		container.append(div);
 	});
 }
+
 
 function mira_show_cropinfo(control, show) {
 
@@ -305,18 +314,22 @@ function mira_show_scan() {
 	.done(function(response) {
 		
 		snackBar(response.message);
-		if(response.type != 'success') return;
+		$('button').prop('disabled', false);
 
-		imagedata.crops = response.crops;
-		mira_show_resize();
-
+		if(response.type != 'error') {
+			imagedata.crops = [];
+			mira_show_listcrops();
+			mira_show_resize();
+			$('#btScan').prop('disabled', true);
+		}
 	})
 	.fail(function() {
 		snackBar('SERVER ERROR!', {error: true});
+		$('button').prop('disabled', false);
 	})
 	.always(function() {
 		$('.spinner').hide();
-		$('button').prop('disabled', false);
+		
 	});
 
 }

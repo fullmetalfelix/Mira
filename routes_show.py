@@ -15,7 +15,8 @@ import pymongo, bson, json
 from bson.objectid import ObjectId
 from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 
-import megadetector
+from megadetector import MegaScanner
+
 
 
 ## Image visualisation page
@@ -37,8 +38,10 @@ def image(imageID):
 @app.route('/show/<imageID>/refresh', methods=['GET'])
 def image_get(imageID):
 
+	imgID = ObjectId(imageID)
+
 	answer = {}
-	imginfo = db.images.find_one({'_id': ObjectId(imageID)})
+	imginfo = db.images.find_one({'_id': imgID})
 	if not imginfo:
 		answer['type'] = 'error'
 		answer['message'] = 'image not found'
@@ -47,7 +50,18 @@ def image_get(imageID):
 
 	# TODO: check permissions
 
-	imginfo['crops'] = list(db.crops.find({'src': ObjectId(imageID)}))
+
+	# check if there is a scan task active
+	task = db.analysis.find_one({'src': imgID})
+	if task != None:
+		answer['type'] = 'inprogress'
+		answer['message'] = 'scan in progress...'
+		imginfo['crops'] = []
+		answer['image'] = imginfo
+		return dumps(answer)
+
+
+	imginfo['crops'] = list(db.crops.find({'src': imgID}))
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
@@ -70,8 +84,10 @@ def image_delete(imageID):
 
 
 
+## Requests a megascan of the image
+#
 @app.route('/show/<imageID>/megascan', methods=['GET'])
-def image_test(imageID):
+def image_megascan(imageID):
 
 	answer = {}
 
@@ -80,15 +96,61 @@ def image_test(imageID):
 	if not img:
 		answer['type'] = 'error'
 		answer['message'] = 'image not found'
-		return 'error'
+		return dumps(answer)
+
+
+	# check if there is already an analysis task running
+	task = db.analysis.find_one({'src': imgID})
+	if task != None:
+		answer['type'] = 'inprogress'
+		answer['message'] = 'scan in progress...'
+		answer['crops'] = []
+		return dumps(answer)
 
 
 	# delete all crops previously found for this image
 	db.crops.remove({'src': imgID})
 
-	# rescan with MS megascanner 3
-	crops = megadetector.MegaScan(img)
-	db.crops.insert_many(crops)
+	# mark down a task for this image
+	db.analysis.insert_one({
+		'src': imgID,
+		'time': datetime.utcnow(),
+	})
+
+	# start a thread with the task - rescan with MS megascanner 3
+	task = MegaScanner(img)
+
+	# give a temporary answer to the client - please wait and refresh
+	answer['type'] = 'inprogress'
+	answer['message'] = 'scan in progress...'
+	answer['crops'] = []
+
+	return dumps(answer)
+
+
+
+
+
+## Check the status of the megascan
+@app.route('/show/<imageID>/megascan/check', methods=['GET'])
+def image_megascan_check(imageID):
+
+	answer = {}
+
+	imgID = ObjectId(imageID)
+	img = db.images.find_one({'_id': imgID})
+	if not img:
+		answer['type'] = 'error'
+		answer['message'] = 'image not found'
+		return dumps(answer)
+
+
+	task = db.analysis.find_one({'src': imgID})
+	if task != None:
+		answer['type'] = 'inprogress'
+		answer['message'] = 'scan in progress...'
+		answer['crops'] = []
+		return dumps(answer)
 
 
 	answer['type'] = 'success'
@@ -96,3 +158,10 @@ def image_test(imageID):
 	answer['crops'] = list(db.crops.find({'src': imgID}))
 
 	return dumps(answer)
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 
-from Mira.app import app
+from Mira.app import app, db
 from PIL import Image
 from io import BytesIO
 import base64
@@ -10,10 +10,40 @@ import PIL
 import numpy as np
 import os
 import tensorflow as tf
-from tqdm import tqdm
 import random
+import threading
 
 
+
+class MegaScanner(object):
+
+	def __init__(self, imageinfo):
+
+		self.imageinfo = imageinfo
+
+		thread = threading.Thread(target=self.run, args=())
+		thread.daemon = True
+		thread.start()
+
+
+	def run(self):
+
+		# do the TF run
+		crops = MegaScan(self.imageinfo)
+
+		# store crops in the database
+		db.crops.insert_many(crops)
+
+		# remove the analysis task from database so the server knows
+		# it is completed
+		db.analysis.remove({'src': self.imageinfo['_id']})
+
+
+		# and done!
+		return
+
+
+		
 
 
 
