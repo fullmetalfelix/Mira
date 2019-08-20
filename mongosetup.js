@@ -17,7 +17,7 @@ db.createCollection('userinfo')
 db.userinfo.insertOne({
 	"name": "federif1",
 	"password" : "sha256$EqeyZ54EPlTiz7IJ$eb1ec0c1f3e6c2d506463e2dc24509d626a2a1e2a045cbb7cde4073d33c794f9",
-	"email": "filippo.federici@aalto.fi",
+	"email": "felix@nanolayers.com",
 	"validated" : true,
 	"created" : ISODate("2019-02-01T16:14:13.783Z"),
 	"fullname" : "Filippo Federici Canova",
