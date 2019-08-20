@@ -188,14 +188,14 @@ function mira_show_refresh() {
 		function(response) {
 			console.log(response.type);
 			snackBar(response.message);
-			
+
 			imagedata = response.image;
 			mira_show();
 			if(response.type == 'inprogress') {
-				$('#btScan').prop('disabled', true);
+				$('[scan-disable]').prop('disabled', true);
 			}
 			else {
-				$('#btScan').prop('disabled', false);
+				$('[scan-disable]').prop('disabled', false);
 			}
 		}
 	);
@@ -320,7 +320,7 @@ function mira_show_scan() {
 			imagedata.crops = [];
 			mira_show_listcrops();
 			mira_show_resize();
-			$('#btScan').prop('disabled', true);
+			$('[scan-disable]').prop('disabled', true);
 		}
 	})
 	.fail(function() {
@@ -331,7 +331,6 @@ function mira_show_scan() {
 		$('.spinner').hide();
 		
 	});
-
 }
 
 

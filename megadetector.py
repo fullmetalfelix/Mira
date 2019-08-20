@@ -171,11 +171,21 @@ def MegaScan(image):
 
 
 	# prepare the image for the megascanner
+	nChannels = 3
 	imgMS = np.array(img)
-	nChannels = imgMS.shape[2]
-	if nChannels > 3:
-		print('Warning: trimming channels from image')
-		imgMS = imgMS[:,:,0:3]
+	if len(imgMS.shape) == 2:
+		# simple 1channel image
+		tmp = np.zeros((imgMS.shape[0], imgMS.shape[1], 3));
+		tmp[:,:,0] = imgMS
+		tmp[:,:,1] = imgMS
+		tmp[:,:,2] = imgMS
+		imgMS = tmp
+	else:
+
+		nChannels = imgMS.shape[2]
+		if nChannels > 3:
+			print('Warning: trimming channels from image')
+			imgMS = imgMS[:,:,0:3]
 
 	
 	if app.config['MEGA_MODEL'] == None:
