@@ -52,7 +52,7 @@ def upload_post():
 		'loc': data['loc'],
 		
 		'uptime': datetime.utcnow(), # upload timestamp
-		'hash': generate_password_hash(data['filename']+data['file'], salt_length=0, method='sha256')
+		'hash': generate_password_hash(data['filename']+data['dataURL'], salt_length=0, method='sha256')
 	}
 
 	# check if there is already an image in the database with the same hash
