@@ -8,6 +8,10 @@
 
 Welcome to the MIRA Home page.<br><br>
 
+{%- if current_user.is_authenticated %}
+You may now upload and analyse images.
+{%- else %}
 <a href="/login">Log in</a> to use the system.
+{%- endif %}
 
 {% endblock %}
