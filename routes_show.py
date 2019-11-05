@@ -66,9 +66,8 @@ def image_delete(imageID):
 
 	imgID = ObjectId(imageID)
 
-	db.crops.remove({'src': imgID})
 	db.images.remove({'_id': imgID})
-	db.analysis.remove({'src': imgID})
+	db.tasks.remove({'imgID': imgID})
 
 	return redirect('/')
 
@@ -109,6 +108,8 @@ def image_megascan(imageID):
 		'msgwait': 'detecting beasts...'
 	}
 	db.tasks.insert_one(taskObj)
+
+	db.images.find_one_and_update({'_id': imgID}, {'$set':{'phase', 1}})
 
 	# give a temporary answer to the client - please wait and refresh
 	answer['type'] = 'success'

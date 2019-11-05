@@ -198,10 +198,10 @@ function mira_show_refresh() {
 		console.log(response);
 		snackBar(response.message, {error: response.type != 'success'});
 		mira_imagedata = response;
-
+		
 		// if there is a task...
 		if(response.task != null) {
-			mira_show_check_cycle(task);
+			mira_show_check_cycle(response.task);
 		}
 
 		imagedata = response.image;
