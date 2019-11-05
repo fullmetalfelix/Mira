@@ -45,7 +45,7 @@ def search_request():
 	if data['loc'] != "":
 		query['loc'] = {'$regex' : loc, '$options' : 'i'}
 
-	results = list(db.images.find(query))
+	results = list(db.images.find(query, {'file': 0, 'hash': 0}))
 
 	answer['type'] = 'success'
 	answer['message'] = 'found {} images'.format(len(results))

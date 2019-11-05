@@ -54,10 +54,10 @@ def upload_post():
 	}
 
 	entry['hash'] = hashlib.sha512()
-	entry['hash'].update(entry['filename'])
-	entry['hash'].update(entry['file'])
+	entry['hash'].update(entry['filename'].encode())
+	entry['hash'].update(entry['file'].encode())
 	entry['hash'] = entry['hash'].digest()
-	
+
 
 	# check if there is already an image in the database with the same hash
 	others = list(db.images.find({'filename': entry['filename'], 'hash': entry['hash']}))
