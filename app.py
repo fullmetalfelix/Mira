@@ -62,7 +62,7 @@ import routes
 import routes_login
 import routes_search
 import routes_upload
-#import routes_show
+import routes_show
 
 
 @app.context_processor

@@ -15,7 +15,7 @@ import pymongo, bson, json
 from bson.objectid import ObjectId
 from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 
-from megadetector import MegaScanner
+#from megadetector import MegaScanner
 
 
 
@@ -45,7 +45,7 @@ def image_get(imageID):
 		answer['message'] = 'image not found'
 		return dumps(answer)
 
-	
+
 	# check if there is a scan task active
 	task = db.analysis.find_one({'src': imgID})
 	if task != None:
@@ -79,7 +79,7 @@ def image_delete(imageID):
 	return redirect('/')
 
 
-
+'''
 ## Requests a megascan of the image
 #
 @app.route('/show/<imageID>/megascan', methods=['GET'])
@@ -155,7 +155,7 @@ def image_megascan_check(imageID):
 
 	return dumps(answer)
 
-
+'''
 
 
 
