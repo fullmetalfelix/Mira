@@ -6,7 +6,8 @@ mv src Mira
 mkdir -p src
 cd Mira
 
-mv config-rahti.py config.py
+# config.py is already good
+# mv config-rahti.py config.py
 
 cat models/msdetector.?? > models/megadetector_v3.pb
 

@@ -59,73 +59,25 @@ h4 {
 	flex-direction: column;
 }
 
-.flexstep {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-
-	width: 100%;
-	padding: 0.5em 0em;
-	justify-content: space-between;
-}
-
-
-.flexcontrol {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-	padding: 8px 0px;
-	/*>>>>>>> origin/cassandra*/
-	width: 100%;
-
-}
-
-.step-controlbox {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-
-	flex-direction: column;
-	justify-content: space-around;
-
-	border: 1px solid #333;
-	border-radius : 4px;
-
-	padding: 0.5em;
-	margin: auto 0;
-
-	min-width: 12em;
-}
 
 
 /* *** NAVBAR STUFF *** **************************************************** */
-/* Add a black background color to the top navigation */
-.navbar {
+
+
+.navbar-nb {
 	
 	margin: 0;
-	top: 0;
-
 	width: 100%;
 	height: 3.6em;
+	z-index: 100;
 
 	background-color: #333;
 	color: white;
 
-	position: fixed;
 	overflow: hidden;
 	text-align: center;
 	text-decoration: none;
-	z-index: 100;
-
+	
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
@@ -136,171 +88,63 @@ h4 {
 	font-size: 12px;
 }
 
-/* chid divs are for clickable sections  */
-.navbar > div {
+button.navbutton {
+
+	margin: 0 4px;
+	padding: 0;
 
 	cursor: pointer;
+	font-family: Consolas,monaco,monospace;
+	white-space: normal;
 
-	background-color: #444;
-	text-align: center;
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
+	background-color: #FFF0;
+	border: none;
+	/*border-radius: 0px;*/
 
 	height: 100%;
-	padding: 0em 0.5em;
+
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
 }
 
-.navbar > div:hover,
-.navbar > div[hover] {
-	background-color: #888;
+button.navbutton:hover,
+button.navbutton[hover] {
+
+	background-color: #FFFFFF30;
 }
 
-.navbar > div.active {
-	background-color: #666;
+
+button.navbutton:disabled,
+button.navbutton[disabled] {
+	opacity: 0.3;
 }
 
-.navbar #separator {
-	flex-grow: 2;
-}
-
-.navbar  img {
-	height: 70%;
-	margin: 0.2em;
-}
-
-.navbar  img.halfimg {
-	height: 50%;
-	margin: unset;
+button.navbutton > img {
 	cursor: pointer;
-}
-
-.navbar  img.halfimg:hover,
-.navbar  img.halfimg[hover] {
-	background-color: #888;
-}
-
-.navbar  img.clickImg:hover,
-.navbar  img.clickImg[hover] {
-	background-color: #888;
-}
-
-
-
-.navbar > div.nobg {
-
-	background-color: unset;
-	cursor: unset;
-}
-
-
-/* *** END OF NAVBAR *** **************************************************** */
-/* *** NEW NAVBAR *** ******************************************************* */
-
-.navbar2 {
-
-	
-	overflow: hidden;
-	position: fixed;
-	margin: 0;
-
-	width: 100%;
-	height: 3.3em;
-	z-index: 100;
-
-	background-color: #333;
-	
-	color: white;
-	text-align: center;
-	text-decoration: none;
-	font-size: 14px;
-	
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-
-	align-items: center;
-}
-
-.navbar div.clickdiv {
-
-	height: 100%;
-	line-height: 3.3em;
-	text-align: center;
-	text-decoration: none;
-
-	background-color: #444;
-	cursor: pointer;
-
-	padding: 0em 0.5em;
-
-}
-
-.navbar div.clickdiv:hover,
-.navbar div.clickdiv[hover] {
-	background-color: #555;
-}
-
-.navbar2 div.clickdiv:active,
-.navbar2 div.clickdiv[active] {
-	background-color: #666;
-}
-
-
-
-.navbar img.small {
-	height: 60%;
-	cursor: pointer;
-	vertical-align: middle;
+	height: 80%;
+	min-width: 0;
+	flex-grow: 1;
 }
 
 
 /* ************************************************************************* */
 /* *** FOOTER *** */
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2em;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  z-index: 100;
+.footer-new {
+	width: 100%;
+	height: 2em;
+	z-index: 100;
 
-  font-size: 12px;
+	background-color: #333;
+	color: white;
 
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.footer > div {
-	cursor: pointer;
 	text-align: center;
+	font-size: 12px;
 
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-
-	height: 100%;
-	padding: 0em 0.5em;
+	justify-content: flex-end;
 }
 
-.footer img {
+.footer-new img {
+	cursor: pointer;
 	height: 90%;
 	margin: 0.2em;
 }

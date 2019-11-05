@@ -1,7 +1,6 @@
 
-<div class="navbar">
+<div class="navbar-nb">
 
-	<!--<img class="clickImg" src="/static/imgs/button.logo.svg" onclick="window.location.href='/login';" title="Cassandra Home Page"/>-->
 	<H1 style="margin-left: 0.2em;">MIRA</H1>
 
 
@@ -11,20 +10,23 @@
 {%- if current_user.is_authenticated %}
 	
 
-
-{%- else %}
-	
 	<div {% if active_page == 'upload' %} class="active"{% endif %} onclick="window.location.href='/upload';" title="Upload an image">
 		<span>Upload</span>
 		<img src="/static/imgs/button.upload.svg" />
-	</div>	
+	</div>
 
 
 	<div {% if active_page == 'search' %} class="active"{% endif %} onclick="window.location.href='/search';" title="Look for images">
 		<span>Search</span>
 		<img src="/static/imgs/button.search.svg" />
-	</div>	
+	</div>
 
+
+{%- else %}
+	
+	<button class="navbutton flexbox centered" onclick="window.location.href='/login';" title="login">
+		<img src="/static/imgs/button.login.svg">
+	</button>
 
 
 {%- endif %}
