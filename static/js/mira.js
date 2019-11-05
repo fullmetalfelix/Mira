@@ -153,7 +153,7 @@ function mira_search_list(results) {
 	container.find('[data-img]').remove();
 
 	let template = container.find('[data-template="img"]');
-
+	results.sort((a,b)=>{return a.uptime['$date']-b.uptime['$date'];})
 	results.forEach((o,i) => {
 
 		o.thumb = atob(o.thumb['$binary']);
