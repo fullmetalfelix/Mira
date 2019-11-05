@@ -26,7 +26,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
 
-from labcore.core.utils.widgets import *
+from Mira.widgets import *
 
 
 
