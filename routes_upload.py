@@ -19,6 +19,7 @@ from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 from PIL import Image
 from io import BytesIO
 import base64
+import hashlib
 
 
 ## Image upload page
@@ -47,13 +48,16 @@ def upload_post():
 	entry = {
 		'filename': data['filename'],
 		'file': data['dataURL'], # the image is stored as its base64 dataURL - might take a bit more space!
-
 		'tags': [t.strip() for t in data['tags'].split(',')],
 		'loc': data['loc'],
-		
 		'uptime': datetime.utcnow(), # upload timestamp
-		'hash': generate_password_hash(data['filename']+data['dataURL'], salt_length=0, method='sha256')
 	}
+
+	entry['hash'] = hashlib.sha512()
+	entry['hash'].update(entry['filename'])
+	entry['hash'].update(entry['file'])
+	entry['hash'] = entry['hash'].digest()
+	
 
 	# check if there is already an image in the database with the same hash
 	others = list(db.images.find({'filename': entry['filename'], 'hash': entry['hash']}))

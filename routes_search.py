@@ -36,9 +36,7 @@ def search_request():
 	answer = {}
 	data = request.json
 
-	tags = data['tags'].split(',')
-	tags = [t.strip() for t in tags]
-
+	tags = [t.strip() for t in data['tags'].split(',')]
 
 	query = {}
 	if len(tags) > 0:

@@ -67,7 +67,6 @@ function mira_file_onchange() {
 	reader.readAsDataURL(file);
 }
 
-
 function mira_upload() {
 
 	$('.spinner').show();
@@ -97,7 +96,6 @@ function mira_upload() {
 }
 
 /* ************************************************************************** */
-
 /* *** SEARCH PAGE *** ****************************************************** */
 
 
@@ -109,34 +107,29 @@ function mira_search() {
 	}
 
 	$('.spinner').show();
-	snackBar('searching...');
 	$('button').prop('disabled', true);
-
+	snackBar('searching...');
 
 	$.ajax({
 		url: '/search/request',
 		data: JSON.stringify(request),
 		contentType: 'application/json;charset=UTF-8',
-		type: 'POST',
-		success: function(response) {
+		type: 'POST'})
+	.done(function(resp){
+		
+		let response = JSON.parse(resp);
+		snackBar(response.message, {error: response.type != 'success'});
 
-			response = JSON.parse(response);
-
-			// show message and unlocks the UI
-			$('.spinner').hide();
-			$('button').prop('disabled', false);
-			snackBar(response.message);
-
-			if(response.type == 'success')
-				mira_search_list(response.results);
-
-		},
-		error: function(error) {
-			
-			$('.spinner').hide();
-			$('button').prop('disabled', false);
-			snackBar('S3RVER ERR0R', {error: true}); console.log(error);
-		}
+		if(response.type == 'success')
+			mira_search_list(response.results);
+	})
+	.fail(function(xhr){
+		snackBar('SERVER ERR0R', {error: true}); 
+		console.log(xhr);
+	})
+	.always(function(){
+		$('.spinner').hide();
+		$('button').prop('disabled', false);
 	});
 }
 
