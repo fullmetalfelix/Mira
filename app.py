@@ -41,6 +41,21 @@ db = Config.DATABASE
 fs = gridfs.GridFS(db)
 
 
+# CELERY
+from celery import Celery  
+from celery.result import AsyncResult  
+import celery.states as states
+
+celery = Celery('tasks', broker=app.config['CELERY_BROKER_URL'], backend=app.config['CELERY_RESULT_BACKEND'])
+celery.conf.update(
+	enable_utc=True,
+	task_serializer='pickle',
+	result_serializer='json',
+	accept_content=['pickle', 'json'],
+	task_track_started=True
+)
+
+
 
 # import all routes
 import routes
