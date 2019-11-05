@@ -17,7 +17,7 @@ class Config(object):
 	DATABASE = MongoClient(MONGO_HOST,
 		username=MONGO_USER,
 		password=MONGO_PWD,
-		authSource='admin',
+		authSource=MONGO_DB,
 	)[MONGO_DB]
 
 	PUBLIC_URL =	os.environ.get('PUBLIC_URL')
