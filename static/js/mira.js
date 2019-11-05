@@ -93,12 +93,21 @@ function mira_upload() {
 	})
 	.always(function(){
 		$('.spinner').hide();
-		$('button').prop('disabled', false);
+		//$('button').prop('disabled', true);
 	});
 }
 
 /* ************************************************************************** */
 /* *** SEARCH PAGE *** ****************************************************** */
+
+
+const img_status = {
+	'-20': 'classifier - empty',
+	'-10': 'detector - empty',
+	'0': 'not processed',
+	'10': 'detector done',
+	'20': 'classifier done',
+};
 
 
 function mira_search() {
@@ -152,6 +161,7 @@ function mira_search_list(results) {
 		div.find('#thumb').attr(src, o.thumb);
 		div.find('#filename').text(o.original);
 		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
+		div.find('#status').text(img_status[o.phase]);
 
 		container.append(div);
 	})

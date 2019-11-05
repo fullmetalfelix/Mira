@@ -76,9 +76,7 @@ def upload_post():
 	img.thumbnail(size, Image.ANTIALIAS)
 	buffer = BytesIO()
 	img.save(buffer, format="PNG")
-	entry['thumb'] = base64.b64encode(buffer.getvalue())
-
-	print(entry['thumb'])
+	entry['thumb'] = 'data:image/png;base64,'.encode()+base64.b64encode(buffer.getvalue())
 
 	# place the entry in the database and retrieve its ID for no reason
 	imgID = db.images.insert_one(entry).inserted_id
