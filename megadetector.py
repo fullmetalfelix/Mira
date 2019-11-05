@@ -31,6 +31,13 @@ class MegaScanner(object):
 		# do the TF run
 		crops = MegaScan(self.imageinfo)
 
+
+		# check that we did not delete the image already
+		img = db.images.find_one({'_id': self.imageinfo['_id']})
+		if not img:
+			return
+
+		# code here means the image is still there most likely
 		# store crops in the database
 		db.crops.insert_many(crops)
 
@@ -180,7 +187,7 @@ def MegaScan(image):
 		tmp[:,:,1] = imgMS
 		tmp[:,:,2] = imgMS
 		imgMS = tmp
-		
+
 	else:
 
 		nChannels = imgMS.shape[2]

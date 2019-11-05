@@ -79,6 +79,7 @@ def image_delete(imageID):
 
 	db.crops.remove({'src': imgID})
 	db.images.remove({'_id': imgID})
+	db.analysis.remove({'src': imgID})
 
 	return redirect('/')
 
