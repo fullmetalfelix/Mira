@@ -10,17 +10,15 @@
 {%- if current_user.is_authenticated %}
 	
 
-	<div {% if active_page == 'upload' %} class="active"{% endif %} onclick="window.location.href='/upload';" title="Upload an image">
+	<button  class="navbutton flexbox centered" onclick="window.location.href='/upload';" title="Upload an image">
 		<span>Upload</span>
-		<img src="/static/imgs/button.upload.svg" />
-	</div>
+		<img src="/static/imgs/button.upload.svg">
+	</button>
 
-
-	<div {% if active_page == 'search' %} class="active"{% endif %} onclick="window.location.href='/search';" title="Look for images">
+	<button class="navbutton flexbox centered" onclick="window.location.href='/search';" title="Look for images">
 		<span>Search</span>
-		<img src="/static/imgs/button.search.svg" />
-	</div>
-
+		<img src="/static/imgs/button.search.svg">
+	</button>
 
 	<button class="navbutton flexbox centered" onclick="window.location.href='/logout';" title="logout">
 		<span>Log Out</span>

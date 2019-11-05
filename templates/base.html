@@ -45,7 +45,9 @@
     {% include 'navbar.html' %}
 
     <div id="fixedpage" style="width: 100%; height: 100%; display: block; overflow: auto;">
-    {% block content %}{% endblock %}
+      <div style="margin: 1em;">
+        {% block content %}{% endblock %}
+      </div>
     </div>
 
     {% include 'footer.html' %}
