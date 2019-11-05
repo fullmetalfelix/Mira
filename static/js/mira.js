@@ -149,8 +149,9 @@ function mira_search_list(results) {
 		div.attr('data-img', o._id['$oid']);
 		div.show();
 
-		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
+		div.find('#thumb').attr(src, o.thumb);
 		div.find('#filename').text(o.original);
+		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
 
 		container.append(div);
 	})

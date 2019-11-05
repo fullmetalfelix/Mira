@@ -51,6 +51,7 @@ def upload_post():
 		'tags': [t.strip() for t in data['tags'].split(',')],
 		'loc': data['loc'],
 		'uptime': datetime.utcnow(), # upload timestamp
+		'phase': 0,
 	}
 
 	entry['hash'] = hashlib.sha512()
@@ -68,6 +69,7 @@ def upload_post():
 
 
 	# make a lowres thumbnail
+	size = 128, 128
 	img = entry['file'].split(';base64,',1)[1]
 	img = base64.b64decode(img)
 	img = Image.open(BytesIO(img))
