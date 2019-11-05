@@ -57,5 +57,3 @@ def utility_processor():
 	return dict(db=db, current_user=current_user)
 
 
-
-
