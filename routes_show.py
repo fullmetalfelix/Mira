@@ -109,7 +109,7 @@ def image_megascan(imageID):
 	}
 	db.tasks.insert_one(taskObj)
 
-	db.images.find_one_and_update({'_id': imgID}, {'$set':{'phase', 1}})
+	db.images.find_one_and_update({'_id': imgID}, {'$set':{'phase': 1}})
 
 	# give a temporary answer to the client - please wait and refresh
 	answer['type'] = 'success'
