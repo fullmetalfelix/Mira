@@ -105,6 +105,7 @@ const img_status = {
 	'-20': 'classifier - empty',
 	'-10': 'detector - empty',
 	'0': 'not processed',
+	'1': 'scan in progress',
 	'10': 'detector done',
 	'20': 'classifier done',
 };
@@ -216,6 +217,9 @@ function mira_show_refresh() {
 
 function mira_show() {
 
+	$('#phase').text(img_status[mira_imagedata.image.phase]);
+	$('[scan-disable]').prop('disabled', mira_imagedata.task != null);
+
 	mira_show_resize();
 	mira_show_listcrops();
 }
@@ -240,6 +244,8 @@ function mira_show_resize(selectedcrop=null) {
 			0,0, canvas.width, canvas.height);
 
 		// for crops
+		if(typeof imagedata.crops === 'undefined') return;
+
 		imagedata.crops.forEach((c,i) => {
 
 			let coords = JSON.parse(JSON.stringify(c.coords));
@@ -326,15 +332,17 @@ function mira_show_scan() {
 
 		if(response.type == 'success') {
 			// start a check cycle
+			mira_imagedata.image.phase = '1';
+			mira_show();
 			mira_imagedata.task = response.task;
 			mira_show_check_cycle(response.task);
 		}
 
 		if(response.type != 'error') {
-			imagedata.crops = [];
-			mira_show_listcrops();
-			mira_show_resize();
-			$('[scan-disable]').prop('disabled', true);
+			mira_imagedata.image.crops = [];
+			
+			mira_show();
+			//$('[scan-disable]').prop('disabled', true);
 		}
 	})
 	.fail(function() {

@@ -47,7 +47,7 @@ def image_get(imageID):
 
 
 	# check if there is a scan task active
-	task = db.tasks.find_one({'imgID': imgID})
+	task = db.tasks.find_one({'imgID': imgID}, {'thumb': 0, 'hash': 0})
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
@@ -125,7 +125,7 @@ def check_detector(taskID):
 	answer['type'] = res.state	
 	answer['result'] = res.result
 
-	
+
 	if res.state == states.PENDING and res.result == None:
 		answer['type'] = 'NOTFOUND'
 

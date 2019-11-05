@@ -44,6 +44,12 @@ $(window).on('resize', mira_show_resize);
 
 	<div id="controls" class="flexcol" style="width: 100%; align-self: flex-start;">
 
+		<div class="flexrow centered">
+			<span style="width: 8em;">status:</span>
+			<span id="phase"></span>
+			<button scan-disable="1" class="button" onclick="mira_show_scan();" title="scan the image for animals">scan</button>
+		</div>
+
 		<center><H4>CROPS</H4></center>
 		<table id="croptable" class="simple" style="width:100%;">
 			<thead><tr>
@@ -62,9 +68,6 @@ $(window).on('resize', mira_show_resize);
 			</tbody>
 		</table>
 
-		<div class="flexrow">
-			<button scan-disable="1" class="button" onclick="mira_show_scan();" title="scan the image for animals">scan</button>
-		</div>
 
 		<center><H4>CONTROLS</H4></center>
 
