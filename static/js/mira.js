@@ -195,12 +195,12 @@ function mira_show_refresh() {
 	$.getJSON('/show/'+imageID+'/refresh', { })
 	.done(function(response) {
 		
-		console.log(response.type);
+		console.log(response);
 		snackBar(response.message, {error: response.type != 'success'});
 		mira_imagedata = response;
 
 		// if there is a task...
-		if(response.task) {
+		if(response.task != null) {
 			mira_show_check_cycle(task);
 		}
 
@@ -340,7 +340,7 @@ function mira_show_scan() {
 
 		if(response.type != 'error') {
 			mira_imagedata.image.crops = [];
-			
+
 			mira_show();
 			//$('[scan-disable]').prop('disabled', true);
 		}

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from Mira.app import app, lm, db
+from Mira.app import app, lm, db, celery
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
+import celery.states as states
+
 from datetime import datetime
 
 import flask
