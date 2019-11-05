@@ -44,9 +44,6 @@ class LoginForm(FlaskForm):
 
 
 
-
-
-
 ## Main login URL
 #
 # POST is called when the client submits the login form.
