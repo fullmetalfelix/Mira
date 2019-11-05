@@ -54,8 +54,3 @@ import routes_upload
 def utility_processor():
 	return dict(db=db, current_user=current_user)
 
-
-@app.route('/ping')
-def ping():
-	return "pong"
-
