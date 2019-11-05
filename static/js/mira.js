@@ -283,9 +283,13 @@ function mira_show_listcrops() {
 	let template = container.find('[data-template="crop"]');
 	container.find('[data-crop]').remove();
 
+	$('#cropinfo').hide();
+
 	// for crops
 	if(typeof imagedata.crops === 'undefined') return;
+	if(imagedata.crops.length == 0) return;
 
+	$('#cropinfo').show();	
 	imagedata.crops.forEach((c,i) => {
 
 		let div = template.clone();

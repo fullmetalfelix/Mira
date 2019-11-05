@@ -50,23 +50,25 @@ $(window).on('resize', mira_show_resize);
 			<button scan-disable="1" class="button" onclick="mira_show_scan();" title="scan the image for animals">scan</button>
 		</div>
 
-		<center><H4>CROPS</H4></center>
-		<table id="croptable" class="simple" style="width:100%;">
-			<thead><tr>
-				<th>ID</th>
-				<th>detector</th>
-				<th>class</th>
-				<th>asd</th>
-			</tr></thead>
-			<tbody>
-				<tr data-template="crop" style="display:none;">
-					<td id="ID"></td>
-					<td id="detector"></td>
-					<td id="cls"></td>
-					<td><img class="controlImg" src="/static/imgs/icon.show.svg" onmouseenter="mira_show_cropinfo(this, true);" onmouseleave="mira_show_cropinfo(this, false);"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div id="cropinfo" class="flexcol">
+			<center><H4>CROPS</H4></center>
+			<table id="croptable" class="simple" style="width:100%;">
+				<thead><tr>
+					<th>ID</th>
+					<th>detector</th>
+					<th>class</th>
+					<th>asd</th>
+				</tr></thead>
+				<tbody>
+					<tr data-template="crop" style="display:none;">
+						<td id="ID"></td>
+						<td id="detector"></td>
+						<td id="cls"></td>
+						<td><img class="controlImg" src="/static/imgs/icon.show.svg" onmouseenter="mira_show_cropinfo(this, true);" onmouseleave="mira_show_cropinfo(this, false);"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 
 		<center><H4>CONTROLS</H4></center>
