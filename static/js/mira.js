@@ -108,6 +108,7 @@ const img_status = {
 	'10': 'detector done',
 	'20': 'classifier done',
 };
+var mira_search_results;
 
 
 function mira_search() {
@@ -130,6 +131,7 @@ function mira_search() {
 		
 		let response = JSON.parse(resp);
 		snackBar(response.message, {error: response.type != 'success'});
+		mira_search_results = response.results;
 
 		if(response.type == 'success')
 			mira_search_list(response.results);
@@ -159,7 +161,7 @@ function mira_search_list(results) {
 		div.show();
 
 		div.find('#thumb').attr('src', o.thumb);
-		div.find('#filename').text(o.original);
+		div.find('#filename').text(o.filename);
 		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
 		div.find('#status').text(img_status[o.phase]);
 
@@ -185,22 +187,20 @@ function mira_show_refresh() {
 	$('.spinner').show();
 	snackBar('refreshing...');
 
-	$.getJSON('/show/'+imageID+'/refresh', { },
-	
-		function(response) {
-			console.log(response.type);
-			snackBar(response.message);
+	$.getJSON('/show/'+imageID+'/refresh', { })
+	.done(function(response) {
+		console.log(response.type);
+		snackBar(response.message, {error: response.type != 'success'});
 
-			imagedata = response.image;
-			mira_show();
-			if(response.type == 'inprogress') {
-				$('[scan-disable]').prop('disabled', true);
-			}
-			else {
-				$('[scan-disable]').prop('disabled', false);
-			}
+		imagedata = response.image;
+		mira_show();
+		if(response.type == 'inprogress') {
+			$('[scan-disable]').prop('disabled', true);
 		}
-	);
+		else {
+			$('[scan-disable]').prop('disabled', false);
+		}
+	});
 }
 
 

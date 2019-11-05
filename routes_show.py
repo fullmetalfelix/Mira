@@ -29,9 +29,7 @@ def image(imageID):
 	if not imginfo:
 		return '<span class="error">Image not found!</span>'
 
-
 	return render_template('page-image.html', imgID=str(imageID))
-
 
 
 ## ajax backend
@@ -47,10 +45,7 @@ def image_get(imageID):
 		answer['message'] = 'image not found'
 		return dumps(answer)
 
-
-	# TODO: check permissions
-
-
+	
 	# check if there is a scan task active
 	task = db.analysis.find_one({'src': imgID})
 	if task != None:
