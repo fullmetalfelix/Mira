@@ -294,7 +294,7 @@ function mira_show_listcrops() {
 
 		let div = template.clone();
 		div.removeAttr('data-template');
-		div.attr('data-crop', c._id['$oid']);
+		div.attr('data-crop', i);
 
 		div.find('#ID').text(i);
 		div.find('#detector').text(c.detector);
