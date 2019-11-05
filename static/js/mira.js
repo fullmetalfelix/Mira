@@ -60,6 +60,8 @@ function mira_file_onchange() {
 			mime: event.target.result.split(';base64,', 1)
 		};
 
+		$('#preview').show();
+		$('#preview').attr('src', mira_data.dataURL);
 
 		$('button').prop('disabled', false);
 		snackBar('file ready');

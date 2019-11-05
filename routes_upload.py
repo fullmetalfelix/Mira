@@ -68,7 +68,9 @@ def upload_post():
 
 
 	# make a lowres thumbnail
-	img = Image.open(BytesIO(entry['file']))
+	img = entry['file'].split(';base64,',1)[1]
+	img = base64.b64decode(img)
+	img = Image.open(BytesIO(img))
 	img.thumbnail(size, Image.ANTIALIAS)
 	buffer = BytesIO()
 	img.save(buffer, format="PNG")
