@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Mira.app import app, lm, db
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
@@ -16,7 +16,9 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 
 
-
+from PIL import Image
+from io import BytesIO
+import base64
 
 
 ## Image upload page
@@ -38,23 +40,43 @@ def upload():
 @app.route('/upload/img', methods=['POST'])
 def upload_post():
 
+	answer = {}
 	data = request.json
 
 	# create the mongo document to store
 	entry = {
-		'original': data['original'],
+		'filename': data['filename'],
+		'file': data['dataURL'], # the image is stored as its base64 dataURL - might take a bit more space!
+
 		'tags': [t.strip() for t in data['tags'].split(',')],
 		'loc': data['loc'],
-		'file': data['dataURL'], # the image is stores as its base64 dataURL - might take a bit more space!
-		'uptime': datetime.utcnow() # upload timestamp
+		
+		'uptime': datetime.utcnow(), # upload timestamp
+		'hash': generate_password_hash(data['filename']+data['file'], salt_length=0, method='sha256')
 	}
+
+	# check if there is already an image in the database with the same hash
+	others = list(db.images.find({'filename': entry['filename'], 'hash': entry['hash']}))
+	if len(others) > 0:
+		answer['type'] = 'error'
+		answer['message'] = 'image already in the database'
+		return dumps(answer)
+
+
+	# make a lowres thumbnail
+	img = Image.open(BytesIO(entry['file']))
+	img.thumbnail(size, Image.ANTIALIAS)
+	buffer = BytesIO()
+	img.save(buffer, format="PNG")
+	entry['thumb'] = base64.b64encode(buffer.getvalue())
+
+	print(entry['thumb'])
 
 	# place the entry in the database and retrieve its ID for no reason
 	imgID = db.images.insert_one(entry).inserted_id
 
 
 	# give an answer to the client so it can move on with its life
-	answer = {}
 	answer['type'] = 'success'
 	answer['message'] = 'image uploaded'
 	return dumps(answer)

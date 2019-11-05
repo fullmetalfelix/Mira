@@ -44,6 +44,7 @@ function mira_file_onchange() {
 	let file = $('#file')[0].files[0];
 
 	$('button').prop('disabled', true);
+	mira_data = null;
 
 	reader.onerror = function() {
 		snackBar('Unable to read ' + file.name);
@@ -52,7 +53,7 @@ function mira_file_onchange() {
 	reader.onload = function(event) {
 
 		mira_data = {
-			original: file.name,
+			filename: file.name,
 			dataURL: event.target.result,
 			tags: $('#tags').val().trim(),
 			loc: $('#loc').val().trim(),
@@ -79,25 +80,20 @@ function mira_upload() {
 		url: '/upload/img',
 		data: JSON.stringify(mira_data),
 		contentType: 'application/json;charset=UTF-8',
-		type: 'POST',
-		success: function(response) {
-
-			response = JSON.parse(response);
-
-			// show message and unlocks the UI
-			$('.spinner').hide();
-			snackBar(response.message);
-			mira_data = null;
-
-		},
-		error: function(error) {
-			
-			$('.spinner').hide();
-			$('button').prop('disabled', false);
-			snackBar('S3RVER ERR0R', {error: true}); console.log(error);
-		}
+		type: 'POST'})
+	.done(function(resp) {
+		let response = JSON.parse(resp);
+		snackBar(response.message, {error: response.type != 'success'});
+		mira_data = null;
+	})
+	.fail(function(xhr){
+		snackBar('ŚERVER ERR0R', {error: true}); 
+		console.log(xhr);
+	})
+	.always(function(){
+		$('.spinner').hide();
+		$('button').prop('disabled', false);
 	});
-
 }
 
 /* ************************************************************************** */
