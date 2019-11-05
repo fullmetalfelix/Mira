@@ -184,6 +184,7 @@ function mira_search_open(control) {
 /* ************************************************************************** */
 
 /* *** IMAGE SHOW SYSTEM *** ************************************************ */
+var mira_imagedata;
 
 function mira_show_refresh() {
 
@@ -192,8 +193,15 @@ function mira_show_refresh() {
 
 	$.getJSON('/show/'+imageID+'/refresh', { })
 	.done(function(response) {
+		
 		console.log(response.type);
 		snackBar(response.message, {error: response.type != 'success'});
+		mira_imagedata = response;
+
+		// if there is a task...
+		if(response.task) {
+			mira_show_check_cycle(task);
+		}
 
 		imagedata = response.image;
 		mira_show();
@@ -206,14 +214,10 @@ function mira_show_refresh() {
 	});
 }
 
-
 function mira_show() {
 
 	mira_show_resize();
 	mira_show_listcrops();
-
-
-	$('.spinner').hide();
 }
 
 function mira_show_resize(selectedcrop=null) {
@@ -293,7 +297,6 @@ function mira_show_listcrops() {
 	});
 }
 
-
 function mira_show_cropinfo(control, show) {
 
 	let cropIndex = null;
@@ -303,11 +306,8 @@ function mira_show_cropinfo(control, show) {
 	mira_show_resize(cropIndex);
 }
 
-
-
 function mira_show_scan() {
 
-	
 	$('.spinner').show();
 	snackBar('detecting beasts...');
 	$('button').prop('disabled', true);
@@ -320,6 +320,13 @@ function mira_show_scan() {
 		
 		snackBar(response.message);
 		$('button').prop('disabled', false);
+
+
+		if(response.type == 'success') {
+			// start a check cycle
+			mira_imagedata.task = response.task;
+			mira_show_check_cycle(response.task);
+		}
 
 		if(response.type != 'error') {
 			imagedata.crops = [];
@@ -338,6 +345,71 @@ function mira_show_scan() {
 	});
 }
 
+
+function mira_show_check_cycle(task) {
+
+	let checkURL = '/check/' + task.ctask;
+
+	// show a message in the footer
+	let msg = task.msgwait;
+	if(typeof task.msgwait === 'undefined') msg = 'background task running...';
+
+	$.getJSON(checkURL, {}, function() {})
+	.done(function(response) { // AJAX worked...
+
+		console.log(response);
+
+		if(response.type == 'NOTFOUND') {
+			/*
+			Notebook_stepmessage(stepdiv, '', false, false);
+			Notebook_log(msender, 'task ['+task.task+'] not found on the server', 'warning', false);
+
+			// TODO: issue a step/task update
+			// there is problem here if the task somehow failed...
+			// the server will not delete the task object from mongo
+			// so the client cannot rerun it
+			// however, the server might have deleted the task from celery, causing
+			// this request to return NOTFOUND
+
+			delete globalinfo.tasks[task.ctask]
+			*/
+			return;
+		}
+
+
+		if(response.type == 'SUCCESS') { 
+			
+			// task was completed, we should refresh the image
+			mira_show_refresh();
+			return;
+		}
+
+
+		if(response.type == 'FAILURE') {
+			/*
+			stepdiv.find('#footer #spinner').hide();
+			stepdiv.find('#footer #error').text('background task failed');
+			console.log('background task '+task.task+' failed'); console.log(task);
+			//snackBar('SERVER ERROR!', {error: true});
+
+			delete globalinfo.tasks[task.ctask];
+			*/
+			return;
+		}
+
+		// in any other case, we should check again
+		setTimeout(function() {
+			mira_show_check_cycle(task);
+		}, 2000);
+
+	})
+	.fail(function(xhr) {
+		snackBar('SERVER ERROR', {error: true});
+		//Notebook_stepmessage(stepdiv, 'error checking background task', false, false);
+		//Notebook_log(msender, 'error checking background task', 'error', true);
+		console.log(xhr);
+	});
+}
 
 
 

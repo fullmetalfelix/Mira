@@ -47,20 +47,12 @@ def image_get(imageID):
 
 
 	# check if there is a scan task active
-	task = db.analysis.find_one({'src': imgID})
-	if task != None:
-		answer['type'] = 'inprogress'
-		answer['message'] = 'scan in progress...'
-		imginfo['crops'] = []
-		answer['image'] = imginfo
-		return dumps(answer)
-
-
-	imginfo['crops'] = list(db.crops.find({'src': imgID}))
+	task = db.tasks.find_one({'imgID': imgID})
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
 	answer['image'] = imginfo
+	answer['task'] = task
 	return dumps(answer)
 
 
@@ -79,7 +71,7 @@ def image_delete(imageID):
 	return redirect('/')
 
 
-'''
+
 ## Requests a megascan of the image
 #
 @app.route('/show/<imageID>/megascan', methods=['GET'])
@@ -88,43 +80,81 @@ def image_megascan(imageID):
 	answer = {}
 
 	imgID = ObjectId(imageID)
-	img = db.images.find_one({'_id': imgID})
+	imginfo = db.images.find_one({'_id': imgID})
 	if not img:
 		answer['type'] = 'error'
 		answer['message'] = 'image not found'
 		return dumps(answer)
 
-
 	# check if there is already an analysis task running
-	task = db.analysis.find_one({'src': imgID})
+	task = db.tasks.find_one({'src': imgID})
 	if task != None:
 		answer['type'] = 'inprogress'
 		answer['message'] = 'scan in progress...'
-		answer['crops'] = []
 		return dumps(answer)
 
 
-	# delete all crops previously found for this image
-	db.crops.remove({'src': imgID})
+	# create a celery task
+	ctask = celery.send_task('mira.detect', args=[current_user.record, imginfo])
+	print('mira.detect task sent:', ctask.id)
 
-	# mark down a task for this image
-	db.analysis.insert_one({
-		'src': imgID,
-		'time': datetime.utcnow(),
-	})
-
-	# start a thread with the task - rescan with MS megascanner 3
-	task = MegaScanner(img)
+	taskObj = {
+		'userID': current_user.record['_id'],
+		'imgID': imgID,
+		'task': 'detect',
+		'progress': 0,
+		'ctask': ctask.id,
+		'msgwait': 'detecting beasts...'
+	}
+	db.tasks.insert_one(taskObj)
 
 	# give a temporary answer to the client - please wait and refresh
-	answer['type'] = 'inprogress'
-	answer['message'] = 'scan in progress...'
-	answer['crops'] = []
+	answer['type'] = 'success'
+	answer['message'] = 'detection started'
+	answer['task'] = taskObj
+	return dumps(answer)
+
+
+
+@app.route('/check/<string:taskID>', methods=['GET'])
+def check_detector(taskID):  
+
+	res = celery.AsyncResult(taskID)
+
+	answer = {}
+	answer['type'] = res.state	
+	answer['result'] = res.result
+
+	
+	if res.state == states.PENDING and res.result == None:
+		answer['type'] = 'NOTFOUND'
+
+
+	if res.state == states.SUCCESS:
+
+		# when the task is foudn to have succeeded, we can pull its results
+		# and then delete the task object completely
+
+		# immediately forget about this task so we can reuse the ID
+		# and another call to this does not evaluate as success
+		celery.AsyncResult(taskID).forget()
+
+		# pull the task object from db
+		db.tasks.delete_one({'ctask': taskID})
+
 
 	return dumps(answer)
 
 
 
+
+
+
+
+
+
+
+'''
 
 
 ## Check the status of the megascan
