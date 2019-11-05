@@ -1,5 +1,4 @@
 from flask_wtf import CSRFProtect
-from flask_sslify import SSLify
 from flask import Flask, send_from_directory, redirect, request
 from flask_login import LoginManager
 from flask_login import current_user
@@ -16,8 +15,6 @@ import glob
 
 app = Flask(__name__)
 app.config.from_object(Config)
-sslify = SSLify(app)
-
 csrf = CSRFProtect(app)
 
 
@@ -56,4 +53,8 @@ import routes_show
 def utility_processor():
 	return dict(db=db, current_user=current_user)
 
+
+@app.route('/ping')
+def ping():
+	return "pong"
 

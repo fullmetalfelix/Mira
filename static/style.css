@@ -151,6 +151,17 @@ button.navbutton > img {
 /* *** END OF FOOTER *** *************************************************** */
 
 
+/* For panels in the center of the screen - like login/register/recovery */
+.centerpanel {
+  margin: auto;
+  width: 40%;
+  border: 1px solid #333;
+  border-radius: 0px;
+  box-shadow: 0 0 4px 0px #c1c1c1;
+  padding: 10px;
+  border-radius: 4px;
+}
+
 
 
 
@@ -1071,16 +1082,7 @@ table.simple tbody tr:nth-child(odd) {
 	margin: 4px;
 }
 
-/* For panels in the center of the screen - like login/register/recovery */
-.centerpanel {
-  margin: auto;
-  width: 40%;
-  border: 1px solid #333;
-  border-radius: 0px;
-  box-shadow: 0 0 4px 0px #c1c1c1;
-  padding: 10px;
-  border-radius: 4px;
-}
+
 
 .panel {
 

@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+{% set active_page = "login" %}
+
+{% block customscripts %}
+<script>
+$(window).on('load', function(){
+	
+	$('#form').on('submit', function() {
+		$('#recoverBT').attr("disabled", true);
+		$('#logbutton').attr("disabled", true);
+	});
+	
+	
+	$('#recoverBT').on('click',function (e) {
+		$('#recoverBT').attr("disabled", true);
+		$('#logbutton').attr("disabled", true);
+	});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+{% from "_macros.html" import render_field_text %}
+{% from "_macros.html" import render_flashes %}
+
+<div class="centerpanel" >
+	
+	<form action="" method="POST" id="form" name="form" role="form">
+		{{ form.hidden_tag() }}
+
+		<div><h3>Log In</h3></div>
+
+		{{ form.name }}
+		{{ form.password }}
+
+		{% with messages = get_flashed_messages(with_categories=True) %}
+		{% if messages %}
+
+		{{ render_flashes(messages, "error", "Error", "error") }}
+		{{ render_flashes(messages, "info", "Info", "") }}
+
+		{% endif %}
+		{% endwith %}
+		
+
+		<div class="flexrow">
+			<button id="recoverBT" class="button" type="button" onclick="window.location.href='{{url_for("recovery")}}';">Forgotten password</button>
+			<span class="control-input"></span>
+			<button class="button" type="submit" id="logbutton">OK</button>
+		</div>
+		
+		
+		
+	</form>
+</div>
+
+
+{% endblock %}
+
+

@@ -67,8 +67,6 @@ class User():
 		record['validated'] = validated
 		record['created'] = datetime.utcnow()
 
-		record['hiddenmsg'] = []
-
 		# ...
 
 		
@@ -92,9 +90,6 @@ class User():
 
 		record['validated'] = True
 		record['created'] = datetime.utcnow()
-
-		record['hiddenmsg'] = []
-		
 
 		# ...
 
