@@ -81,7 +81,7 @@ def image_megascan(imageID):
 
 	imgID = ObjectId(imageID)
 	imginfo = db.images.find_one({'_id': imgID})
-	if not img:
+	if not imginfo:
 		answer['type'] = 'error'
 		answer['message'] = 'image not found'
 		return dumps(answer)
