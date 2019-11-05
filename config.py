@@ -13,7 +13,12 @@ class Config(object):
 	MONGO_USER = os.environ.get('MONGO_USER')
 	MONGO_PWD = os.environ.get('MONGO_PWD')
 	MONGO_DB = os.environ.get('MONGO_DB')
-	DATABASE = MongoClient('mongodb://{}:{}@{}'.format(MONGO_USER, MONGO_PWD,MONGO_HOST))[MONGO_DB]
+	#DATABASE = MongoClient('mongodb://{}:{}@{}'.format(MONGO_USER, MONGO_PWD,MONGO_HOST),)[MONGO_DB]
+	DATABASE = MongoClient(MONGO_HOST,
+		username=MONGO_USER,
+		password=MONGO_PWD,
+		authSource='admin',
+	)[MONGO_DB]
 
 	PUBLIC_URL =	os.environ.get('PUBLIC_URL')
 	PUBLIC_NAME =	"Mira"
@@ -28,4 +33,3 @@ class Config(object):
 	DOCS_LOC = 'docs/'
 	
 	MEGA_MODEL = None
-	
