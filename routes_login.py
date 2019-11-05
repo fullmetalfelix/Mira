@@ -47,12 +47,6 @@ class LoginForm(FlaskForm):
 
 
 
-
-
-
-
-
-
 ## Main login URL
 #
 # POST is called when the client submits the login form.
@@ -70,7 +64,7 @@ def login():
 
 		if not userRecord:
 			flask.flash("Wrong username or password!", category='error')
-			return render_template('login.html', title='Cassandra Login', form=form)
+			return render_template('login.html', title='MIRA Login', form=form)
 
 		# code here means the record exists
 
@@ -84,7 +78,7 @@ def login():
 			# check if the email is verified
 			if not userRecord['validated']:
 				flask.flash("Email address not verified.", category='error')
-				return render_template('login.html', title='Cassandra Login', form=form)
+				return render_template('login.html', title='MIRA Login', form=form)
 
 
 			# LOGIN SUCCESFUL --- continue
@@ -100,19 +94,15 @@ def login():
 			# when login is successful, the old password and reset request are removed from the database
 
 			# what is this? redirect to main page with login details
-			return redirect(request.args.get("next") or app.config['PUBLIC_URL'] + "dashboard")
+			return redirect(request.args.get("next") or app.config['PUBLIC_URL'])
 
 		else:
 			time.sleep(5)
 			flask.flash("Wrong username or password.", category='error')
-			return render_template('login.html', title='Cassandra Login', form=form)
+			return render_template('login.html', title='MIRA Login', form=form)
 
 
-	return render_template('login.html', title='Cassandra Login', form=form)
-
-
-
-
+	return render_template('login.html', title='MIRA Login', form=form)
 
 
 
