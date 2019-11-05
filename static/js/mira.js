@@ -43,7 +43,7 @@ function mira_file_onchange() {
 	let reader = new FileReader();
 	let file = $('#file')[0].files[0];
 
-	$('button').prop('disabled', true);
+	$('#btOK').prop('disabled', true);
 	mira_data = null;
 
 	reader.onerror = function() {
@@ -63,7 +63,7 @@ function mira_file_onchange() {
 		$('#preview').show();
 		$('#preview').attr('src', mira_data.dataURL);
 
-		$('button').prop('disabled', false);
+		$('#btOK').prop('disabled', false);
 		snackBar('file ready');
 	};
 	reader.readAsDataURL(file);
@@ -73,7 +73,7 @@ function mira_upload() {
 
 	$('.spinner').show();
 	snackBar('uploading...');
-	$('button').prop('disabled', true);
+	$('#btOK').prop('disabled', true);
 
 	console.log('upload:'); console.log(mira_data);
 
@@ -158,7 +158,7 @@ function mira_search_list(results) {
 		div.attr('data-img', o._id['$oid']);
 		div.show();
 
-		div.find('#thumb').attr(src, o.thumb);
+		div.find('#thumb').attr('src', o.thumb);
 		div.find('#filename').text(o.original);
 		div.find('#uptime').text(moment(o.uptime["$date"]).calendar(null, {sameElse: 'DD/MMM/YYYY'}));
 		div.find('#status').text(img_status[o.phase]);

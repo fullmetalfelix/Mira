@@ -45,10 +45,13 @@ def upload_post():
 	data = request.json
 
 	# create the mongo document to store
+	tags = [t.strip() for t in data['tags'].split(',')]
+	tags = [t for t in tags if len(t) > 0]
+	
 	entry = {
 		'filename': data['filename'],
 		'file': data['dataURL'], # the image is stored as its base64 dataURL - might take a bit more space!
-		'tags': [t.strip() for t in data['tags'].split(',')],
+		'tags': tags,
 		'loc': data['loc'],
 		'uptime': datetime.utcnow(), # upload timestamp
 		'phase': 0,
@@ -66,7 +69,6 @@ def upload_post():
 		answer['type'] = 'error'
 		answer['message'] = 'image already in the database'
 		return dumps(answer)
-
 
 	# make a lowres thumbnail
 	size = 128, 128
@@ -100,6 +102,6 @@ def upload_post():
 def upload_batch():
 
 
-	return ""
+	return "NOT IMPLEMENTED YET"
 
 
