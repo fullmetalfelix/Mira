@@ -282,6 +282,8 @@ function mira_show_listcrops() {
 	container.find('[data-crop]').remove();
 
 	// for crops
+	if(typeof imagedata.crops === 'undefined') return;
+
 	imagedata.crops.forEach((c,i) => {
 
 		let div = template.clone();
