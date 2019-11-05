@@ -198,19 +198,15 @@ function mira_show_refresh() {
 		console.log(response);
 		snackBar(response.message, {error: response.type != 'success'});
 		mira_imagedata = response;
-		
-		// if there is a task...
-		if(response.task != null) {
-			mira_show_check_cycle(response.task);
-		}
 
 		imagedata = response.image;
 		mira_show();
-		if(response.type == 'inprogress') {
-			$('[scan-disable]').prop('disabled', true);
-		}
-		else {
-			$('[scan-disable]').prop('disabled', false);
+
+		// if there is a task...
+		if(response.task != null) {
+			mira_show_check_cycle(response.task);
+		} else {
+			$('.spinner').hide();
 		}
 	});
 }
