@@ -156,6 +156,8 @@ function mira_search_list(results) {
 
 	results.forEach((o,i) => {
 
+		o.thumb = atob(o.thumb['$binary']);
+
 		let div = template.clone();
 		div.removeAttr('data-template');
 		div.attr('data-img', o._id['$oid']);

@@ -45,6 +45,9 @@ def search_request():
 	if data['loc'] != "":
 		query['loc'] = {'$regex' : loc, '$options' : 'i'}
 
+	if data['status'] != 'any':
+		query['phase'] = int(data['status'])
+
 	results = list(db.images.find(query, {'file': 0, 'hash': 0}))
 
 	answer['type'] = 'success'
