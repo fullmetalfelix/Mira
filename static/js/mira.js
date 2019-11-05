@@ -116,7 +116,8 @@ function mira_search() {
 	let request = {
 		loc: $('#loc').val().trim(),
 		tags: $('#tags').val().trim(),
-	}
+		status: $('select#phase').val(),
+	};
 
 	$('.spinner').show();
 	$('button').prop('disabled', true);
