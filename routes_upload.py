@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Mira.app import app, lm, db
+from Mira.app import app, lm, db, celery
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -39,6 +39,7 @@ def upload():
 # this is called by the client when uploading an image
 #
 @app.route('/upload/img', methods=['POST'])
+@login_required
 def upload_post():
 
 	answer = {}
@@ -54,7 +55,7 @@ def upload_post():
 		'tags': tags,
 		'loc': data['loc'],
 		'uptime': datetime.utcnow(), # upload timestamp
-		'phase': 0,
+		'phase': 1, # MARKED AS 1 SINCE THE MEGADETECTOR STARTS IMMEDIATELY
 	}
 
 	entry['hash'] = hashlib.sha512()
@@ -84,10 +85,25 @@ def upload_post():
 	imgID = db.images.insert_one(entry).inserted_id
 
 
+	# the image is in the database, automatically run the megadetector
+	ctask = celery.send_task('mira.detect', args=[imgID])
+	taskObj = {
+		'userID': current_user.record['_id'],
+		'imgID': imgID,
+		'task': 'detect',
+		'progress': 0,
+		'ctask': ctask.id,
+		'msgwait': 'detecting beasts...'
+	}
+	db.tasks.insert_one(taskObj)
+
+
 	# give an answer to the client so it can move on with its life
 	answer['type'] = 'success'
 	answer['message'] = 'image uploaded'
 	return dumps(answer)
+
+
 
 
 

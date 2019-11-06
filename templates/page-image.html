@@ -32,9 +32,11 @@ $(window).on('resize', mira_show_resize);
 
 
 
-<div class="flexrow" style="width: 100%; margin-bottom: 3em; justify-content: flex-start;">
+<div class="flexrow" style="width: 100%; justify-content: flex-start;">
 
-	<div class="flexcol" style="min-width: 70%;max-width: 70%; height: 100%;">
+
+
+	<div id="imagepanel" class="flexcol" style="min-width: 70%;max-width: 70%; height: 100%; padding; 0.5em 0;">
 		<center><H4>IMAGE</H4></center>
 		<!--<img id="image" src="#" style="display: block;width: 100%;height: auto;">-->
 		<div id="canvasdiv" style="display: block;width: 100%;height: 100%;">
@@ -42,29 +44,41 @@ $(window).on('resize', mira_show_resize);
 		</div>
 	</div>
 
-	<div id="controls" class="flexcol" style="width: 100%; align-self: flex-start;">
 
-		<div class="flexrow centered">
-			<span style="width: 8em;">status:</span>
-			<span id="phase" class="separator"></span>
-			<button scan-disable="1" class="button" onclick="mira_show_scan();" title="scan the image for animals">scan</button>
+
+	<div id="controls" class="flexcol" style="width: 100%; align-self: flex-start; padding: 0.5em;">
+
+		<div id="statuspanel">
+
+			<center><H4>CONTROLS</H4></center>
+
+			<div class="flexrow centered">
+				<span style="width: 8em;">status:</span>
+				<span id="phase" class="separator"></span>
+			</div>
 		</div>
+
+
+
 
 		<div id="cropinfo" class="flexcol">
 			<center><H4>CROPS</H4></center>
 			<table id="croptable" class="simple" style="width:100%;">
 				<thead><tr>
-					<th>ID</th>
-					<th>detector</th>
-					<th>class</th>
-					<th>asd</th>
+					<th>L output</th>
+					<th>S output</th>
+					<th style="text-align: center;">details</th>
 				</tr></thead>
 				<tbody>
 					<tr data-template="crop" style="display:none;">
-						<td id="ID"></td>
 						<td id="detector"></td>
 						<td id="cls"></td>
-						<td><img class="controlImg" src="/static/imgs/icon.show.svg" onmouseenter="mira_show_cropinfo(this, true);" onmouseleave="mira_show_cropinfo(this, false);"></td>
+
+						<td style="text-align: center;">
+							<button class="wbutton" title="show analysis details" onclick="mira_show_cropdetails(this);">
+								<img src="/static/imgs/icon.show.svg">
+							</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

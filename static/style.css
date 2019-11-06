@@ -238,337 +238,51 @@ div#dashboard #menu > div.active {
 }
 
 
-[data-ext~="tab"] > div {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: baseline;
-	padding: 8px 0px;
-}
-
-[data-ext~="tab"] > div.centered {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-	padding: 8px 0px;
-}
-
-[data-ext~="tab"] > div.nobox {
-
-	display: block;
-	padding: 0;
-}
-
-[data-ext~="tab"] div.nobox {
-
-	display: block;
-	padding: 0;
-}
-
-[data-ext~="tab"] th.left {
-	text-align: left;
-}
-
-[data-ext~="tab"] td.center {
-	text-align: center;
-}
-
-[data-ext~="tab"] #addelement {
-	padding: 0;
-	cursor: pointer;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-/* *** ACCOUNT PANEL *** *************************************************** */
-#account[data-ext~="tab"] button,
-#groups-home[data-ext~="tab"] button {
-	height: 2em;
-}
-
-
-#groups[data-ext~="tab"] .clickImg {
-	height: 2em;
-}
-
-
-#account-other[data-ext~="tab"] > #panel-user-info > div {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: baseline;
-	padding: 8px 0px;
-	width: 100%;
-}
-
-
-
-
-/* *** GROUPS/HOME PANEL *** *********************************************** */
-[data-type="userbox"]:hover,
-[data-type="userbox"][hover] {
-	background-color: #EEE;
-}
-
-
-/* *** NOTEBOOKS PANEL *** ************************************************* */
-
-#notebooks[data-ext~="tab"] [data-linker="1"] {
-	cursor: pointer;
-}
-
-#notebooks[data-ext~="tab"] tbody tr:hover,
-#notebooks[data-ext~="tab"] tbody tr[hover] {
-	background-color: #EEE;
-}
-
-
-/* *** MESSAGE PANEL *** *************************************************** */
-
-
-div#dashboard #messages[data-ext~="tab"] div#controlwrap {
-	top: 0;
-	height: 4em;
-	border-bottom: 1px solid black;
-}
-
-
-div#dashboard #messages[data-ext~="tab"] {
-	position: relative;
-	height: 100%;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-}
-
-
-div#dashboard #messages[data-ext~="tab"] #controls {
-	
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0;
-	height: 100%;
-	margin: 0em 1em;
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-}
-
-#messages[data-ext~="tab"] .ctrl {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-
-	border: 1px solid black;
-	border-radius: 4px;
-
-	padding: 0.2em 0.5em;
-	margin: 0em 0.5em;
-	cursor: pointer;
-}
-#messages[data-ext~="tab"] .ctrl:hover,
-#messages[data-ext~="tab"] .ctrl[hover] {
-	background-color: #EEE;
-}
-
-#messages[data-ext~="tab"] .ctrl.selected{
-	background-color: #DDD;
-}
-
-
-div#dashboard #messages[data-ext~="tab"] #listbox {
-	top: 4em;
-	bottom: 0;
-	overflow: auto;
-}
-
-div#dashboard #messages[data-ext~="tab"] #list {
-	
-	display: grid;
-	margin-top: 1em;
-	grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-}
-
-#messages[data-ext~="tab"] .messagebox {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	flex-direction: column;
-
-	min-width: 15em;
-	max-width: 20em;
-
-	padding: 0;
-	border: 1px solid #444;
-	border-radius: 4px;
-	margin: 0.2em 0.2em;
-}
-
-/* ************************************************************************* */
-
-/* *** ADMIN  PANEL *** **************************************************** */
-div#dashboard #admin[data-ext~="tab"] {
-	position: relative;
-	height: 100%;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-}
-
-div#dashboard #admin[data-ext~="tab"] div#controlwrap {
-	top: 0;
-	height: 4em;
-	border-bottom: 1px solid black;
-}
-
-div#dashboard #admin[data-ext~="tab"] #controls {
-	
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0;
-	height: 100%;
-	margin: 0em 1em;
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-}
-
-div#dashboard #admin[data-ext~="tab"] .fixpanel {
-	top: 4em;
-	bottom: 0;
-	overflow: auto;
-}
-
-/* *** SEARCH PANEL *** **************************************************** */
-
-div#dashboard #search[data-ext~="tab"] div#controlwrap {
-	top: 0;
-	height: 4em;
-	border-bottom: 1px solid black;
-}
-
-
-div#dashboard #search[data-ext~="tab"] {
-	position: relative;
-	height: 100%;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-}
-
-
-div#dashboard #search[data-ext~="tab"] #controls {
-	
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0;
-	height: 100%;
-	margin: 0em 1em;
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-}
-
-#search[data-ext~="tab"] .ctrl {
-
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	align-items: center;
-
-	border: 1px solid black;
-	border-radius: 4px;
-
-	padding: 0.2em 0.5em;
-	margin: 0em 0.5em;
-	cursor: pointer;
-}
-#search[data-ext~="tab"] .ctrl:hover,
-#search[data-ext~="tab"] .ctrl[hover] {
-	background-color: #EEE;
-}
-
-#search[data-ext~="tab"] .ctrl.selected{
-	background-color: #DDD;
-}
-
-
-div#dashboard #search[data-ext~="tab"] .fixpanel {
-	top: 4em;
-	bottom: 0;
-	overflow: auto;
-}
-
-.searchpanel {
-	margin: 0.5em;
-}
-
-div#dashboard #search[data-ext~="tab"] #list {
-	
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	flex-flow: row wrap;
-	align-items: stretch;
-	align-content: stretch;
-	justify-content: space-evenly;
-	margin-top: 1em;
-}
-
-
-
-div#dashboard #search[data-ext~="tab"] #filters [data-filter]>label {
-	width: 10em;
-}
-
-
-
-/* ************************************************************************* */
-
-
 
 
 
 
 /* *** BUTTONS *** ********************************************************* */
+
+.wbutton {
+
+	margin: 0 4px;
+	padding: 0;
+
+	cursor: pointer;
+	font-family: Consolas,monaco,monospace;
+	white-space: normal;
+
+	background-color: #FFF0;
+	border: none;
+	border-radius: 2px;
+
+	height: 1.5em;
+	width: 1.5em;
+
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+
+.wbutton:disabled,
+.wbutton[disabled]{
+	opacity: 0.3;
+}
+
+.wbutton:hover,
+.wbutton[hover] {
+
+	box-shadow: 0 0 4px 0px #4c4c4c59;
+}
+
+.wbutton > img {
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+	font-size: unset;
+}
+
+
 
 .gbutton {
 

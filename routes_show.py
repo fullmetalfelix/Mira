@@ -119,6 +119,7 @@ def image_megascan(imageID):
 
 
 
+
 @app.route('/check/<string:taskID>', methods=['GET'])
 def check_detector(taskID):  
 
