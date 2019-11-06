@@ -24,6 +24,7 @@ from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 ## Image visualisation page
 #
 @app.route('/show/<imageID>', methods=['GET'])
+@login_required
 def image(imageID):
 
 	
@@ -37,6 +38,7 @@ def image(imageID):
 
 ## ajax backend
 @app.route('/show/<imageID>/refresh', methods=['GET'])
+@login_required
 def image_get(imageID):
 
 	imgID = ObjectId(imageID)
@@ -61,7 +63,7 @@ def image_get(imageID):
 			celery.AsyncResult(taskID).forget()
 			db.tasks.delete_one({'ctask': taskID})
 			task = None
-	
+
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
@@ -71,9 +73,75 @@ def image_get(imageID):
 
 
 
+@app.route('/show/<imageID>/override', methods=['POST'])
+@login_required
+def image_override(imageID):
+
+	answer = {}
+	data = request.json
+	imgID = ObjectId(imageID)
+
+	imginfo = db.images.find_one({'_id': imgID}, {'thumb': 0, 'hash': 0})
+	if not imginfo:
+		answer['type'] = 'error'
+		answer['message'] = 'image not found'
+		return dumps(answer)
+
+	task = db.tasks.find_one({'imgID': imgID})
+	if task:
+		answer['type'] = 'error'
+		answer['message'] = 'detection in progress'
+		return dumps(answer)
+
+	if imginfo['phase'] != 10:
+		answer['type'] = 'error'
+		answer['message'] = 'unknown error'
+		return dumps(answer)
+
+	crops = imginfo.get('crops', [])
+	if data['cropID'] >= len(crops):
+		answer['type'] = 'error'
+		answer['message'] = 'invalid crop'
+		return dumps(answer)
+	crop = crops[data['cropID']]
+	
+
+	result = {}
+	result[data['cls']] = 1.0
+
+	newcrops = []
+	for i in range(len(crops)):
+
+		if i == data['cropID']:
+			# this is the crop to edit
+			newanal = [a for a in crops[i]['analysis'] if a['name'] != 'user']
+			analysis = {
+				'name': 'user',
+				'fullname': current_user.record['fullname'],
+				'result': result,
+			}
+			newanal.append(analysis)
+			crops[i]['analysis'] = newanal
+
+		newcrops.append(crops[i])
+
+
+	db.images.find_one_and_update(
+		{'_id': imgID},
+		{'$set': { 'crops': newcrops }}
+	)
+
+
+	answer['type'] = 'success'
+	answer['message'] = 'done'
+	return dumps(answer)
+
+
+
 ## Delete an image from the database
 #
 @app.route('/show/delete/<imageID>', methods=['GET'])
+@login_required
 def image_delete(imageID):
 
 	imgID = ObjectId(imageID)
@@ -85,54 +153,10 @@ def image_delete(imageID):
 
 
 
-## Requests a megascan of the image
-#
-@app.route('/show/<imageID>/megascan', methods=['GET'])
-def image_megascan(imageID):
-
-	answer = {}
-
-	imgID = ObjectId(imageID)
-	imginfo = db.images.find_one({'_id': imgID})
-	if not imginfo:
-		answer['type'] = 'error'
-		answer['message'] = 'image not found'
-		return dumps(answer)
-
-	# check if there is already an analysis task running
-	task = db.tasks.find_one({'src': imgID})
-	if task != None:
-		answer['type'] = 'inprogress'
-		answer['message'] = 'scan in progress...'
-		return dumps(answer)
-
-
-	# create a celery task
-	ctask = celery.send_task('mira.detect', args=[current_user.record, imginfo])
-	print('mira.detect task sent:', ctask.id)
-
-	taskObj = {
-		'userID': current_user.record['_id'],
-		'imgID': imgID,
-		'task': 'detect',
-		'progress': 0,
-		'ctask': ctask.id,
-		'msgwait': 'detecting beasts...'
-	}
-	db.tasks.insert_one(taskObj)
-
-	db.images.find_one_and_update({'_id': imgID}, {'$set':{'phase': 1}})
-
-	# give a temporary answer to the client - please wait and refresh
-	answer['type'] = 'success'
-	answer['message'] = 'detection started'
-	answer['task'] = taskObj
-	return dumps(answer)
-
-
 
 
 @app.route('/check/<string:taskID>', methods=['GET'])
+@login_required
 def check_detector(taskID):  
 
 	res = celery.AsyncResult(taskID)
@@ -146,64 +170,6 @@ def check_detector(taskID):
 		answer['type'] = 'NOTFOUND'
 
 
-	if res.state == states.SUCCESS:
-
-		# when the task is foudn to have succeeded, we can pull its results
-		# and then delete the task object completely
-
-		# immediately forget about this task so we can reuse the ID
-		# and another call to this does not evaluate as success
-		celery.AsyncResult(taskID).forget()
-
-		# pull the task object from db
-		db.tasks.delete_one({'ctask': taskID})
-
-
 	return dumps(answer)
-
-
-
-
-
-
-
-
-
-
-'''
-
-
-## Check the status of the megascan
-@app.route('/show/<imageID>/megascan/check', methods=['GET'])
-def image_megascan_check(imageID):
-
-	answer = {}
-
-	imgID = ObjectId(imageID)
-	img = db.images.find_one({'_id': imgID})
-	if not img:
-		answer['type'] = 'error'
-		answer['message'] = 'image not found'
-		return dumps(answer)
-
-
-	task = db.analysis.find_one({'src': imgID})
-	if task != None:
-		answer['type'] = 'inprogress'
-		answer['message'] = 'scan in progress...'
-		answer['crops'] = []
-		return dumps(answer)
-
-
-	answer['type'] = 'success'
-	answer['message'] = 'scan completed'
-	answer['crops'] = list(db.crops.find({'src': imgID}))
-
-	return dumps(answer)
-
-'''
-
-
-
 
 

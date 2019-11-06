@@ -25,6 +25,7 @@ import hashlib
 ## Image upload page
 #
 @app.route('/upload', methods=['GET'])
+@login_required
 def upload():
 
 	# not much to do here... just return the template

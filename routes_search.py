@@ -20,6 +20,7 @@ from bson.json_util import dumps, CANONICAL_JSON_OPTIONS
 ## Image search page
 #
 @app.route('/search', methods=['GET'])
+@login_required
 def search():
 
 	return render_template('page-search.html')
@@ -31,6 +32,7 @@ def search():
 ## Image search page
 #
 @app.route('/search/request', methods=['POST'])
+@login_required
 def search_request():
 
 	answer = {}

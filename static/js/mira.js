@@ -292,6 +292,8 @@ function mira_show_listcrops() {
 	$('#croplist').show();	
 	imagedata.crops.forEach((c,i) => {
 
+		c.index = i;
+
 		let div = template.clone();
 		div.removeAttr('data-template');
 		div.attr('data-crop', i);
@@ -340,12 +342,12 @@ function mira_show_cropdetails(control) {
 	$('[data-crop]').css('background', '');
 	div.css('background', '#EEF');
 
-	$('#cropinfo').show();
-
-
 	let template = $('#cropinfo [data-template="analysis"]');
 	let container = $('#cropinfo');
+	container.data('crop', cropinfo);
 	container.find('[data-analysis]').remove();
+	container.show();
+
 
 	cropinfo.analysis.forEach((a) => {
 
@@ -373,51 +375,44 @@ function mira_show_cropdetails(control) {
 
 
 
+function mira_show_override() {
+
+	let container = $('#cropinfo');
+	let cropinfo = container.data('crop');
+	let cls = container.find('#classfixer').val();
+
+	let request = {
+		cropID: cropinfo.index,
+		class: cls,
+	};
 
 
+	$('#btOverride').prop('disabled', true);
 
 
-
-function mira_show_scan() {
-
-	$('.spinner').show();
-	snackBar('detecting beasts...');
-	$('button').prop('disabled', true);
-
-
-	$.getJSON('/show/'+imageID+'/megascan', function(response) {
-		console.log('megadetect done');
+	$.ajax({
+		url: '/show/'+imageID+'/override',
+		data: JSON.stringify(request),
+		contentType: 'application/json;charset=UTF-8',
+		type: 'POST'
 	})
-	.done(function(response) {
-		
-		snackBar(response.message);
-		$('button').prop('disabled', false);
-
-
-		if(response.type == 'success') {
-			// start a check cycle
-			mira_imagedata.image.phase = '1';
-			mira_show();
-			mira_imagedata.task = response.task;
-			mira_show_check_cycle(response.task);
-		}
-
-		if(response.type != 'error') {
-			mira_imagedata.image.crops = [];
-
-			mira_show();
-			//$('[scan-disable]').prop('disabled', true);
-		}
+	.done(function(resp) {
+		let response = JSON.parse(resp);
+		snackBar(response.message, {error: response.type != 'success'});
+		mira_show_refresh();
 	})
-	.fail(function() {
-		snackBar('SERVER ERROR!', {error: true});
-		$('button').prop('disabled', false);
+	.fail(function(xhr){
+		snackBar('ŚERVER ERR0R', {error: true}); 
+		console.log(xhr);
 	})
-	.always(function() {
-		$('.spinner').hide();
-		
+	.always(function(){
+		//$('.spinner').hide();
+		$('#btOverride').prop('disabled', false);
 	});
 }
+
+
+
 
 
 function mira_show_check_cycle(task) {

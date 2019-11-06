@@ -57,7 +57,12 @@ $(window).on('resize', mira_show_resize);
 				<span id="phase" class="separator"></span>
 			</div>
 
-
+			<div class="flexrow">
+				
+				<button class="button" onclick="mira_show_refresh();" title="reload the image">refresh</button>
+				<span id="separator"></span>
+				<button scan-disable="1" class="button" onclick="mira_show_delete();" title="delete the image from the database">delete</button>
+			</div>
 
 		</div>
 
@@ -85,7 +90,7 @@ $(window).on('resize', mira_show_resize);
 		</div>
 
 
-		<div id="cropinfo" class="flexcol">
+		<div id="cropinfo" class="flexcol" style="display: none;">
 			<center><H4>CROP DETAILS</H4></center>
 
 			<div class="flexcol" data-template="analysis" style="display: none; margin-bottom: 1em;">
@@ -110,7 +115,7 @@ $(window).on('resize', mira_show_resize);
 					<option value="rodent">rodent</option>
 					<option value="other">other</option>
 				</select>
-				<button class="wbutton" title="override the model prediction" onclick="mira_show_override();">
+				<button id="btOverride" class="wbutton" title="override the model prediction" onclick="mira_show_override();">
 					<img src="/static/imgs/icon.edit.svg">
 				</button>
 			</div>
@@ -119,12 +124,7 @@ $(window).on('resize', mira_show_resize);
 
 
 		<div id="separator"></div>
-		<div class="flexrow">
-			
-			<button class="button" onclick="mira_show_refresh();" title="reload the image">refresh</button>
-			<span id="separator"></span>
-			<button scan-disable="1" class="button" onclick="mira_show_delete();" title="delete the image from the database">delete</button>
-		</div>
+
 	</div>
 
 </div>
