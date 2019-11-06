@@ -107,7 +107,7 @@ def image_override(imageID):
 	
 
 	result = {}
-	result[data['cls']] = 1.0
+	result[data['class']] = 1.0
 
 	newcrops = []
 	for i in range(len(crops)):
