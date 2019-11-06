@@ -283,18 +283,19 @@ function mira_show_listcrops() {
 	let template = container.find('[data-template="crop"]');
 	container.find('[data-crop]').remove();
 
-	$('#cropinfo').hide();
+	$('#croplist').hide();
 
 	// for crops
 	if(typeof imagedata.crops === 'undefined') return;
 	if(imagedata.crops.length == 0) return;
 
-	$('#cropinfo').show();	
+	$('#croplist').show();	
 	imagedata.crops.forEach((c,i) => {
 
 		let div = template.clone();
 		div.removeAttr('data-template');
 		div.attr('data-crop', i);
+		div.data('crop', c);
 
 		div.find('#ID').text(i);
 		div.find('#detector').text(c.detector);
@@ -313,6 +314,33 @@ function mira_show_cropinfo(control, show) {
 
 	mira_show_resize(cropIndex);
 }
+
+
+
+function mira_show_cropdetails(control) {
+
+	let div = $(control).closest('[data-crop]');
+	let cropID = parseInt(div.attr('data-crop'));
+	let cropinfo = div.data('crop');
+
+	mira_show_resize(cropID);
+
+
+	$('[data-crop]').css('background', 'white');
+	div.css('background', '#EEF');
+	
+	$('#cropinfo').show();
+
+
+
+}
+
+
+
+
+
+
+
 
 function mira_show_scan() {
 

@@ -37,8 +37,8 @@ $(window).on('resize', mira_show_resize);
 
 
 	<div id="imagepanel" class="flexcol" style="min-width: 70%;max-width: 70%; height: 100%; padding; 0.5em 0;">
+		
 		<center><H4>IMAGE</H4></center>
-		<!--<img id="image" src="#" style="display: block;width: 100%;height: auto;">-->
 		<div id="canvasdiv" style="display: block;width: 100%;height: 100%;">
 			<canvas id="canvas"></canvas>
 		</div>
@@ -48,7 +48,7 @@ $(window).on('resize', mira_show_resize);
 
 	<div id="controls" class="flexcol" style="width: 100%; align-self: flex-start; padding: 0.5em;">
 
-		<div id="statuspanel">
+		<div id="statuspanel" class="flexcol" style="margin-bottom: 2em;">
 
 			<center><H4>CONTROLS</H4></center>
 
@@ -56,12 +56,13 @@ $(window).on('resize', mira_show_resize);
 				<span style="width: 8em;">status:</span>
 				<span id="phase" class="separator"></span>
 			</div>
+
+
+
 		</div>
 
 
-
-
-		<div id="cropinfo" class="flexcol">
+		<div id="croplist" class="flexcol" style="margin-bottom: 2em;">
 			<center><H4>CROPS</H4></center>
 			<table id="croptable" class="simple" style="width:100%;">
 				<thead><tr>
@@ -71,8 +72,8 @@ $(window).on('resize', mira_show_resize);
 				</tr></thead>
 				<tbody>
 					<tr data-template="crop" style="display:none;">
-						<td id="detector"></td>
-						<td id="cls"></td>
+						<td id="outputL"></td>
+						<td id="outputS"></td>
 
 						<td style="text-align: center;">
 							<button class="wbutton" title="show analysis details" onclick="mira_show_cropdetails(this);">
@@ -85,7 +86,17 @@ $(window).on('resize', mira_show_resize);
 		</div>
 
 
-		<center><H4>CONTROLS</H4></center>
+		<div id="cropinfo" class="flexcol">
+			<center><H4>CROP DETAILS</H4></center>
+
+			<div class="flexrow centered" data-template>
+				<span style="width: 8em;">status:</span>
+				<span id="phase" class="separator"></span>
+			</div>
+
+
+
+		</div>
 
 
 		<div id="separator"></div>

@@ -88,7 +88,10 @@ h4 {
 	font-size: 12px;
 }
 
-.navbar-nb span {color: white;}
+.navbar-nb span {
+	color: white;
+	margin-left: 0.5em;
+}
 
 button.navbutton {
 
@@ -168,61 +171,6 @@ button.navbutton > img {
 
 
 
-
-/* *** DASHBOARD *** ******************************************************* */
-
-div#dashboard {
-	width:100%; 
-	height:100%;
-}
-
-div#dashboard #mainbox {
-	position: absolute;
-	flex-grow: 2; 
-	align-items: flex-start;
-	width: 100%;
-	top: 0;
-	bottom: 1em;
-}
-
-div#dashboard div#menu {
-	padding: 1em;
-	margin: 0;
-	min-width: 10em;
-}
-
-div#dashboard div#menu div[data-ext]>img {
-	margin-right: 1em;
-}
-
-div#dashboard div#tabcontainer {
-	padding: 0em;
-	margin: 0;
-	margin-left: 1em;
-	flex-grow: 2;
-	height: 100%;
-	overflow-y: auto;
-	overflow-x: auto;
-}
-
-div#dashboard [data-ext~="tab"] {
-	padding: 1em 1em;
-	margin: 0;
-}
-
-div#dashboard #menu > div {
-	align-items: center;
-	cursor: pointer;
-
-}
-div#dashboard #menu > div:hover,
-div#dashboard #menu > div[hover] {
-	background: #EEE;	
-}
-
-div#dashboard #menu > div.active {
-	background: #DDD;	
-}
 
 
 /* *** GENERIC STUFF IN THE PANELS *** ************************************ */
