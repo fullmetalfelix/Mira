@@ -297,10 +297,20 @@ function mira_show_listcrops() {
 		div.attr('data-crop', i);
 		div.data('crop', c);
 
-		div.find('#ID').text(i);
-		div.find('#detector').text(c.detector);
-		div.find('#cls').text(c.animal);
-
+		let ML = c.analysis.find(o => o.name == 'Foxer');
+		if(ML) {
+			if(ML.result.empty > 0.5) div.find('#outputL').text('---');
+			else {
+				if(ML.result.fox > ML.result.skunk) div.find('#outputL').text('fox: ' + (ML.result.fox*100).toFixed(2) + '%');
+				else div.find('#outputL').text('skunk: ' + (ML.result.skunk*100).toFixed(2) + '%');
+			}
+		}
+		ML = c.analysis.find(o => o.name == 'ratter');
+		if(ML) {
+			if(ML.result.empty > 0.5) div.find('#outputS').text('---');
+			else div.find('#outputS').text('rodent: ' + (ML.result.rodent*100).toFixed(2) + '%');
+		}
+		
 		div.show();
 		container.append(div);
 	});
