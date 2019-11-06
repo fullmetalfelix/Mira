@@ -88,10 +88,15 @@ $(window).on('resize', mira_show_resize);
 		<div id="cropinfo" class="flexcol">
 			<center><H4>CROP DETAILS</H4></center>
 
-			<div class="flexrow centered" data-template="analysis">
-				<span style="width: 8em;">model:</span>
-				<div id="results">
+			<div class="flexcol" data-template="analysis" style="display: none; margin-bottom: 1em;">
+
+				<div class="flexrow centered">
+					<span style="width: 8em;">model:</span>
+					<span id="model"></span>
 				</div>
+
+
+				
 			</div>
 
 

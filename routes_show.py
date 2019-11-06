@@ -60,7 +60,8 @@ def image_get(imageID):
 		if needsDelete:
 			celery.AsyncResult(taskID).forget()
 			db.tasks.delete_one({'ctask': taskID})
-
+			task = None
+	
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'

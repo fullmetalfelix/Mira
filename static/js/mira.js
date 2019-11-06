@@ -323,6 +323,7 @@ function mira_show_cropdetails(control) {
 	let cropID = parseInt(div.attr('data-crop'));
 	let cropinfo = div.data('crop');
 
+	// redraw the image with crop
 	mira_show_resize(cropID);
 
 
@@ -331,6 +332,13 @@ function mira_show_cropdetails(control) {
 
 	$('#cropinfo').show();
 
+
+	let template = $('#cropinfo [data-template="analysis"]');
+	let container = $('#cropinfo');
+
+	container.find('[data-analysis]').remove();
+
+	
 
 
 }
