@@ -338,7 +338,27 @@ function mira_show_cropdetails(control) {
 
 	container.find('[data-analysis]').remove();
 
-	
+	cropinfo.analysis.forEach((a) => {
+
+		let adiv = template.clone();
+		adiv.removeAttr('data-template');
+		adiv.attr('data-analysis', '1');
+		adiv.find('#model').text(a.name);
+		adiv.find('#model').attr('title', a.fullname);
+
+		let res = adiv.find('#results');
+		let classes = Object.keys(a.result).sort();
+		classes.forEach((cls) => {
+			let spn = $(document.createElement('span'));
+			let p = a.result[cls]*100;
+			spn.text(cls+': '+ p.toFixed(2) + '%');
+			res.append(spn);
+		});
+
+
+		adiv.show();
+		container.append(adiv);
+	});
 
 
 }
