@@ -34,6 +34,7 @@ def image(imageID):
 	return render_template('page-image.html', imgID=str(imageID))
 
 
+
 ## ajax backend
 @app.route('/show/<imageID>/refresh', methods=['GET'])
 def image_get(imageID):
@@ -41,7 +42,7 @@ def image_get(imageID):
 	imgID = ObjectId(imageID)
 
 	answer = {}
-	imginfo = db.images.find_one({'_id': imgID})
+	imginfo = db.images.find_one({'_id': imgID}, {'thumb': 0, 'hash': 0})
 	if not imginfo:
 		answer['type'] = 'error'
 		answer['message'] = 'image not found'
@@ -49,7 +50,17 @@ def image_get(imageID):
 
 
 	# check if there is a scan task active
-	task = db.tasks.find_one({'imgID': imgID}, {'thumb': 0, 'hash': 0})
+	task = db.tasks.find_one({'imgID': imgID})
+	if task:
+		# if there is a task, check if it is done
+		taskID = task['ctask']
+		res = celery.AsyncResult(taskID)
+		needsDelete = (res.state == states.PENDING and res.result == None) or (res.state == states.SUCCESS)
+
+		if needsDelete:
+			celery.AsyncResult(taskID).forget()
+			db.tasks.delete_one({'ctask': taskID})
+
 
 	answer['type'] = 'success'
 	answer['message'] = 'image loaded'
