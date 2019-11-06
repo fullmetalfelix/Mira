@@ -310,7 +310,7 @@ function mira_show_listcrops() {
 			if(ML.result.empty > 0.5) div.find('#outputS').text('---');
 			else div.find('#outputS').text('rodent: ' + (ML.result.rodent*100).toFixed(2) + '%');
 		}
-		
+
 		div.show();
 		container.append(div);
 	});
@@ -345,7 +345,6 @@ function mira_show_cropdetails(control) {
 
 	let template = $('#cropinfo [data-template="analysis"]');
 	let container = $('#cropinfo');
-
 	container.find('[data-analysis]').remove();
 
 	cropinfo.analysis.forEach((a) => {
@@ -365,9 +364,8 @@ function mira_show_cropdetails(control) {
 			res.append(spn);
 		});
 
-
 		adiv.show();
-		container.append(adiv);
+		adiv.insertBefore(template);
 	});
 
 

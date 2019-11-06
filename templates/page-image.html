@@ -99,10 +99,21 @@ $(window).on('resize', mira_show_resize);
 					<span style="width: 8em;">results:</span>
 					<div id="results" class="flexcol"></div>
 				</div>
-
 			</div>
 
-
+			<div class="flexrow centered">
+				<span style="width: 8em;">override:</span>
+				<select id="classfixer" class="separator">
+					<option value="empty">empty</option>
+					<option value="fox">fox</option>
+					<option value="skunk">skunk</option>
+					<option value="rodent">rodent</option>
+					<option value="other">other</option>
+				</select>
+				<button class="wbutton" title="override the model prediction" onclick="mira_show_override();">
+					<img src="/static/imgs/icon.edit.svg">
+				</button>
+			</div>
 
 		</div>
 
