@@ -279,7 +279,7 @@ function mira_show_resize(selectedcrop=null) {
 // constructs the list of crops in the table
 function mira_show_listcrops() {
 
-	let container = $('#croptable tbody');
+	let container = $('#croplist tbody');
 	let template = container.find('[data-template="crop"]');
 	container.find('[data-crop]').remove();
 
@@ -326,9 +326,9 @@ function mira_show_cropdetails(control) {
 	mira_show_resize(cropID);
 
 
-	$('[data-crop]').css('background', 'white');
+	$('[data-crop]').css('background', '');
 	div.css('background', '#EEF');
-	
+
 	$('#cropinfo').show();
 
 

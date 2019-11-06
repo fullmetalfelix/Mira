@@ -64,7 +64,7 @@ $(window).on('resize', mira_show_resize);
 
 		<div id="croplist" class="flexcol" style="margin-bottom: 2em;">
 			<center><H4>CROPS</H4></center>
-			<table id="croptable" class="simple" style="width:100%;">
+			<table class="simple" style="width:100%;">
 				<thead><tr>
 					<th>L output</th>
 					<th>S output</th>
@@ -74,7 +74,6 @@ $(window).on('resize', mira_show_resize);
 					<tr data-template="crop" style="display:none;">
 						<td id="outputL"></td>
 						<td id="outputS"></td>
-
 						<td style="text-align: center;">
 							<button class="wbutton" title="show analysis details" onclick="mira_show_cropdetails(this);">
 								<img src="/static/imgs/icon.show.svg">
@@ -90,7 +89,7 @@ $(window).on('resize', mira_show_resize);
 			<center><H4>CROP DETAILS</H4></center>
 
 			<div class="flexrow centered" data-template>
-				<span style="width: 8em;">status:</span>
+				<span style="width: 8em;">:</span>
 				<span id="phase" class="separator"></span>
 			</div>
 
