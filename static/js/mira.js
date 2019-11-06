@@ -284,7 +284,8 @@ function mira_show_listcrops() {
 	container.find('[data-crop]').remove();
 
 	$('#croplist').hide();
-
+	$('#cropinfo').hide();
+	
 	// for crops
 	if(typeof imagedata.crops === 'undefined') return;
 	if(imagedata.crops.length == 0) return;
