@@ -103,11 +103,6 @@ function mira_upload() {
 
 function mira_upload_many() {
 
-	$('.spinner').show();
-	snackBar('uploading...');
-	$('#btOK').prop('disabled', true);
-	$('#file').prop('disabled', true);
-
 	let input = $('#file')[0];
 	let files = Array.from(input.files);
 
@@ -115,6 +110,11 @@ function mira_upload_many() {
 		snackBar('No file selected!', {error: true});
 		return;
 	}
+
+	$('.spinner').show();
+	snackBar('uploading...');
+	$('#btOK').prop('disabled', true);
+	$('#file').prop('disabled', true);
 
 	
 	let promises = [];
