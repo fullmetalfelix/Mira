@@ -70,33 +70,6 @@ function mira_file_onchange() {
 	
 	mira_scroll_index = $('#file')[0].files.length-1;
 	mira_upload_preview();
-
-	/*
-	$('#btOK').prop('disabled', true);
-	mira_data = null;
-
-	reader.onerror = function() {
-		snackBar('Unable to read ' + file.name);
-	};
-
-	reader.onload = function(event) {
-
-		mira_data = {
-			filename: file.name,
-			dataURL: event.target.result,
-			tags: $('#tags').val().trim(),
-			loc: $('#loc').val().trim(),
-			mime: event.target.result.split(';base64,', 1)
-		};
-
-		$('#preview').show();
-		$('#preview').attr('src', mira_data.dataURL);
-
-		$('#btOK').prop('disabled', false);
-		snackBar('file ready');
-	};
-	reader.readAsDataURL(file);
-	*/
 }
 
 function mira_upload() {
@@ -134,13 +107,17 @@ function mira_upload_many() {
 	snackBar('uploading...');
 	$('#btOK').prop('disabled', true);
 	$('#file').prop('disabled', true);
-	
+
 	let input = $('#file')[0];
-	let files = input.files;
+	let files = Array.from(input.files);
 
+	if(files.length == 0) {
+		snackBar('No file selected!', {error: true});
+		return;
+	}
+
+	
 	let promises = [];
-
-
 
 	files.forEach((file) => {
 
