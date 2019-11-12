@@ -38,11 +38,18 @@ function snackBar(message, options={timeout: 3000, error: false}) {
 
 
 var mira_data = null;
+var mira_scroll_index = 0;
+
 function mira_file_onchange() {
 
 	let reader = new FileReader();
+	let input = $('#file')[0];
 	let file = $('#file')[0].files[0];
+	
+	mira_scroll_index = $('#file')[0].files.length-1;
+	mira_upload_preview();
 
+	/*
 	$('#btOK').prop('disabled', true);
 	mira_data = null;
 
@@ -67,10 +74,11 @@ function mira_file_onchange() {
 		snackBar('file ready');
 	};
 	reader.readAsDataURL(file);
+	*/
 }
 
 function mira_upload() {
-
+	/*
 	$('.spinner').show();
 	snackBar('uploading...');
 	$('#btOK').prop('disabled', true);
@@ -95,7 +103,45 @@ function mira_upload() {
 		$('.spinner').hide();
 		//$('button').prop('disabled', true);
 	});
+	*/
 }
+
+
+function mira_upload_scroll(dir) {
+
+	let input = $('#file')[0];
+	let files = input.files;
+	console.log(files);
+
+	mira_scroll_index += dir;
+	if(mira_scroll_index < 0) mira_scroll_index = files.length - 1;
+	else if(mira_scroll_index == files.length) mira_scroll_index = 0;
+
+	// update preview
+	mira_upload_preview();
+}
+
+function mira_upload_preview() {
+
+	let reader = new FileReader();
+	let input = $('#file')[0];
+	let file = $('#file')[0].files[mira_scroll_index];
+
+	reader.onerror = function() {
+		snackBar('Unable to read ' + file.name);
+		$('#preview').attr('src', null);
+		$('#prevfile').text('preview: ' + file.name + ' [invalid]');
+	};
+
+	reader.onload = function(event) {
+		$('#prevfile').text('preview: ' + file.name);
+		$('#preview').show();
+		$('#preview').attr('src', event.target.result);
+	};
+	reader.readAsDataURL(file);
+
+}
+
 
 /* ************************************************************************** */
 /* *** SEARCH PAGE *** ****************************************************** */

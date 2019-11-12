@@ -15,7 +15,7 @@
 <div class="flexcol">
 	<div class="flexrow">
 		<span>Select an image to upload: </span>
-		<input id="file" type="file" onchange="mira_file_onchange();">
+		<input id="file" type="file" onchange="mira_file_onchange();" multiple>
 	</div>
 	<div class="flexrow" title="comma separated tags">
 		<span style="width: 8em;">tags:</span>
@@ -31,8 +31,14 @@
 		<button id="btOK" class="button" onclick="mira_upload();" disabled="">upload</button>
 	</div>
 
-	<img id="preview" style="max-width: 95%;">
-
+	<div class="flexcol" style="width: 100%;">
+		<span id="prevfile">preview: </span>
+		<div class="flexrow" >
+			<button class="button" conclick="mira_upload_scroll(-1);"><<</button>
+			<img id="preview" style="flex-grow: 2;">
+			<button class="button" conclick="mira_upload_scroll(1);">>></button>
+		</div>
+	</div>
 </div>
 
 {% endblock %}
