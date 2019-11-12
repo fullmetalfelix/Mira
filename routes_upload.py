@@ -51,6 +51,7 @@ def upload_post():
 	tags = [t for t in tags if len(t) > 0]
 	
 	entry = {
+		'user': current_user.record['_id'],
 		'filename': data['filename'],
 		'file': data['dataURL'], # the image is stored as its base64 dataURL - might take a bit more space!
 		'tags': tags,
