@@ -32,6 +32,28 @@ function snackBar(message, options={timeout: 3000, error: false}) {
 }
 
 
+var all = function(array){
+    var deferred = $.Deferred();
+    var fulfilled = 0, length = array.length;
+    var results = [];
+
+    if (length === 0) {
+        deferred.resolve(results);
+    } else {
+        array.forEach(function(promise, i){
+            $.when(promise()).then(function(value) {
+                results[i] = value;
+                fulfilled++;
+                if(fulfilled === length){
+                    deferred.resolve(results);
+                }
+            });
+        });
+    }
+
+    return deferred.promise();
+};
+
 
 
 /* *** UPLOAD PAGE *** ****************************************************** */
@@ -106,6 +128,70 @@ function mira_upload() {
 	*/
 }
 
+function mira_upload_many() {
+
+	$('.spinner').show();
+	snackBar('uploading...');
+	$('#btOK').prop('disabled', true);
+	$('#file').prop('disabled', true);
+	
+	let input = $('#file')[0];
+	let files = input.files;
+
+	let promises = [];
+
+
+
+	files.forEach((file) => {
+
+		promises.push(function() {
+
+			return $.Deferred(function(dfd) {
+
+				let reader = new FileReader();
+				reader.onerror = function() {
+					snackBar('Unable to read ' + file.name);
+					dfd.reject();
+				};
+				reader.onload = function(event) {
+					let clientdata = {
+						filename: file.name,
+						dataURL: event.target.result,
+						tags: $('#tags').val().trim(),
+						loc: $('#loc').val().trim(),
+						mime: event.target.result.split(';base64,', 1)
+					};
+
+					$.ajax({
+						url: '/upload/img',
+						data: JSON.stringify(clientdata),
+						contentType: 'application/json;charset=UTF-8',
+						type: 'POST'
+					})
+					.done(function(resp) {
+						
+					})
+					.fail(function(xhr){
+						snackBar('ŚERVER ERR0R', {error: true}); 
+						console.log(xhr);
+					})
+					.always(function(){
+						dfd.resolve();
+					});
+
+				};
+				reader.readAsDataURL(file);
+			}).promise();
+		});
+	}); // end of loop over images
+
+	$.when(all(promises)).then(function() {
+	    $('.spinner').hide();
+	    snackBar('images were uploaded');
+	    $('#btOK').prop('disabled', false);
+	    $('#file').prop('disabled', false);
+	});
+}
 
 function mira_upload_scroll(dir) {
 
@@ -125,7 +211,7 @@ function mira_upload_preview() {
 
 	let reader = new FileReader();
 	let input = $('#file')[0];
-	let file = $('#file')[0].files[mira_scroll_index];
+	let file = input.files[mira_scroll_index];
 
 	reader.onerror = function() {
 		snackBar('Unable to read ' + file.name);
